@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lesson01_Steering_Behavior
+namespace SteeringCS
 {
     static class Program
     {

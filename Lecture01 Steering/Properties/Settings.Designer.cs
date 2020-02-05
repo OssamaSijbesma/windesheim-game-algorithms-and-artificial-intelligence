@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lesson01_Steering_Behavior.Properties
+namespace SteeringCS.Properties
 {
 
 
