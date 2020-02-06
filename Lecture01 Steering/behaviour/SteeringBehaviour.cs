@@ -17,6 +17,4 @@ namespace SteeringCS
             ME = me;
         }
     }
-
-    
 }

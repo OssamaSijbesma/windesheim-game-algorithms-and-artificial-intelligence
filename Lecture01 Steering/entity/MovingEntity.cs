@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace SteeringCS.entity
 {
-
     abstract class MovingEntity : BaseGameEntity
     {
         public Vector2D Velocity { get; set; }
@@ -25,12 +24,22 @@ namespace SteeringCS.entity
 
         public override void Update(float timeElapsed)
         {
+            // Calculate the combined force from each steering behaviour.
             Vector2D steeringForce = SB.Calculate();
-            Vector2D acceleration = steeringForce.divide(Mass);
-            Velocity.Add(acceleration.Multiply(timeElapsed));
-            Velocity.truncate(MaxSpeed);
-            Pos.Add(Velocity.Multiply(timeElapsed));
 
+            // Acceleration = Force / Mass (Newton's laws of physics).
+            Vector2D acceleration = steeringForce.Clone().divide(Mass);
+
+            // Update velocity.
+            Velocity.Add(acceleration.Clone().Multiply(timeElapsed));
+
+            // Make sure the moving entity does not exceed maximum speed.
+            Velocity.Truncate(MaxSpeed);
+
+            // Update position.
+            Pos.Add(Velocity.Clone().Multiply(timeElapsed));
+
+            // Update heading if the velocity is bigger than 0
             if (Velocity.LengthSquared() > 0) 
             {
                 Heading = Velocity.Clone().Normalize();

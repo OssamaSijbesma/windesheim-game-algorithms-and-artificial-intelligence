@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SteeringCS
 {
-   
     public class Vector2D
     {
         public double X { get; set; }
@@ -71,7 +70,7 @@ namespace SteeringCS
             return this;
         }
 
-        public Vector2D truncate(double maX)
+        public Vector2D Truncate(double maX)
         {
             if (Length() > maX)
             {
@@ -91,6 +90,4 @@ namespace SteeringCS
             return String.Format("({0},{1})", X, Y);
         }
     }
-
-
 }
