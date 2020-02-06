@@ -11,6 +11,7 @@ namespace SteeringCS.entity
     {
         public Vector2D Velocity { get; set; }
         public float Mass { get; set; }
+        public Vector2D Heading { get; set; }
         public float MaxSpeed { get; set; }
 
         public SteeringBehaviour SB { get; set; }
@@ -24,8 +25,16 @@ namespace SteeringCS.entity
 
         public override void Update(float timeElapsed)
         {
-            // to do
-            Console.WriteLine(ToString());
+            Vector2D steeringForce = SB.Calculate();
+            Vector2D acceleration = steeringForce.divide(Mass);
+            Velocity.Add(acceleration.Multiply(timeElapsed));
+            Velocity.truncate(MaxSpeed);
+            Pos.Add(Velocity.Multiply(timeElapsed));
+
+            if (Velocity.LengthSquared() > 0) 
+            {
+                Heading = Velocity.Clone().Normalize();
+            }
         }
 
         public override string ToString()

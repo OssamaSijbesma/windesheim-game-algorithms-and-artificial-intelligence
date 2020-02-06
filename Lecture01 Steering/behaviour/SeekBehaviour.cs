@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace SteeringCS.behaviour
 {
-    class SeekBehaviour 
+    class SeekBehaviour : SteeringBehaviour
     {
-        // to do
+        public SeekBehaviour(MovingEntity me) : base(me)
+        {
+        }
+
+        public override Vector2D Calculate()
+        {
+            Vector2D desiredVelocity = ME.MyWorld.Target.Pos.Clone().Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
+            return desiredVelocity.Sub(ME.Velocity);
+        }
     }
 }

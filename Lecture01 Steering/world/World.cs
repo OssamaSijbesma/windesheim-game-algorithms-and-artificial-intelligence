@@ -38,7 +38,7 @@ namespace SteeringCS
         {
             foreach (MovingEntity me in entities)
             {
-                // me.SB = new SeekBehaviour(me); // restore later
+                me.SB = new SeekBehaviour(me); // restore later
                 me.Update(timeElapsed);
             }  
         }
