@@ -1,4 +1,4 @@
-﻿namespace SteeringCS
+﻿namespace Arce
 {
     partial class Form1
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dbPanel1 = new SteeringCS.DBPanel();
+            this.dbPanel1 = new Arce.DBPanel();
             this.SuspendLayout();
             // 
             // dbPanel1
