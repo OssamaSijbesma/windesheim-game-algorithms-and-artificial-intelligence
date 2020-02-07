@@ -5,27 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arce.entity
+namespace Arce.entity.units
 {
-    class Villager : MovingEntity
+    class Chicken : MovingEntity
     {
-        private Color color;
+        private Image _sprite;
 
-        public Villager(Vector2D pos, World w) : base(pos, w)
+        public Knight(Vector2D pos, World w) : base(pos, w)
         {
-            Scale = 3;
+            Scale = 5;
             Mass = 40;
             MaxSpeed = 80;
-            color = Color.Aqua;
+            _sprite = Image.FromFile("../../assets/sprites/chicken.png");
         }
+
         public override void Render(Graphics g)
         {
             double leftCorner = Pos.X - Scale;
             double rightCorner = Pos.Y - Scale;
             double size = Scale * 2;
 
-            Pen p = new Pen(color, 2);
-            g.DrawEllipse(p, new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size));
+            Rectangle region = new Rectangle(32, 0, 16, 16);
+            g.DrawImage(_sprite, Convert.ToSingle(Pos.X), Convert.ToSingle(Pos.Y), region, GraphicsUnit.Pixel);
         }
     }
 }
