@@ -48,7 +48,7 @@
             this.ClientSize = new System.Drawing.Size(612, 436);
             this.Controls.Add(this.dbPanel1);
             this.Name = "Form1";
-            this.Text = "Steering";
+            this.Text = "Arce";
             this.ResumeLayout(false);
 
         }
