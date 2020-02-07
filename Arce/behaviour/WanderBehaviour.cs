@@ -15,7 +15,7 @@ namespace Arce.behaviour
 
         public override Vector2D Calculate()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
