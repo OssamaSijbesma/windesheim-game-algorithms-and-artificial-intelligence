@@ -21,12 +21,20 @@ namespace Arce.entity
 
         public override void Render(Graphics g)
         {
-            double leftCorner = Pos.X - Scale;
-            double rightCorner = Pos.Y - Scale;
-            double size = Scale * 2;
+            Rectangle region;
 
-            Rectangle region = new Rectangle(32, 0, 16, 16);
-            g.DrawImage(_sprite, Convert.ToSingle(Pos.X), Convert.ToSingle(Pos.Y), region, GraphicsUnit.Pixel);
+            if (Heading.X > 0.5)
+                region = new Rectangle(16, 0, 16, 16);
+            else if (Heading.X < -0.5)
+                region = new Rectangle(48, 0, 16, 16);
+            else if (Heading.Y > 0.5)
+                region = new Rectangle(32, 0, 16, 16);
+            else if (Heading.Y < -0.5)
+                region = new Rectangle(0, 0, 16, 16);
+            else
+                region = new Rectangle(0, 16, 16, 16);
+
+            g.DrawImage(_sprite, (int) Pos.X, (int) Pos.Y, region, GraphicsUnit.Pixel);
         }
     }
 }
