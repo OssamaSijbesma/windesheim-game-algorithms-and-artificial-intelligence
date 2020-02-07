@@ -68,7 +68,10 @@
     <Compile Include="DBPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="entity\units\Chicken.cs" />
+    <Compile Include="entity\units\Knight.cs" />
     <Compile Include="entity\MovingEntity.cs" />
+    <Compile Include="entity\units\Villager.cs" />
     <Compile Include="entity\Vehicle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -106,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\sprites\chicken.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

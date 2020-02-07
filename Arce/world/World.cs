@@ -29,6 +29,9 @@ namespace Arce
             v.VColor = Color.Blue;
             entities.Add(v);
 
+            Knight knight = new Knight(new Vector2D(50, 50), this);
+            entities.Add(knight);
+
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
             Target.Pos = new Vector2D(100, 40);
