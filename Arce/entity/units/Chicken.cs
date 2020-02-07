@@ -21,10 +21,6 @@ namespace Arce.entity
 
         public override void Render(Graphics g)
         {
-            double leftCorner = Pos.X - Scale;
-            double rightCorner = Pos.Y - Scale;
-            double size = Scale * 2;
-
             Rectangle region;
 
             if (Heading.X > 0.5)
