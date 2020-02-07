@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arce.entity.units
+namespace Arce.entity
 {
     class Chicken : MovingEntity
     {
@@ -14,8 +14,8 @@ namespace Arce.entity.units
         public Chicken(Vector2D pos, World w) : base(pos, w)
         {
             Scale = 5;
-            Mass = 40;
-            MaxSpeed = 80;
+            Mass = 10;
+            MaxSpeed = 5;
             _sprite = Image.FromFile("../../assets/sprites/chicken.png");
         }
 

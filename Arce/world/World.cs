@@ -25,12 +25,15 @@ namespace Arce
 
         private void populate()
         {
-            Vehicle v = new Vehicle(new Vector2D(10,10), this);
+            /*Vehicle v = new Vehicle(new Vector2D(10,10), this);
             v.VColor = Color.Blue;
             entities.Add(v);
 
             Knight knight = new Knight(new Vector2D(50, 50), this);
             entities.Add(knight);
+            */
+            Chicken chicken = new Chicken(new Vector2D(50, 50), this);
+            entities.Add(chicken);
 
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
