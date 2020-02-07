@@ -11,7 +11,7 @@ namespace Arce.entity.units
     {
         private Image _sprite;
 
-        public Knight(Vector2D pos, World w) : base(pos, w)
+        public Chicken(Vector2D pos, World w) : base(pos, w)
         {
             Scale = 5;
             Mass = 40;
