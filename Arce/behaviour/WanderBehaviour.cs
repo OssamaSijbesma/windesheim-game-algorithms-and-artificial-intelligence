@@ -29,8 +29,11 @@ namespace Arce.behaviour
             // Increase the length of the vector to the same as the radius of the wander circle.
             wanderTarget.Multiply(wanderRadius);
 
-            // Set world target
-            //ME.MyWorld.Target.Pos = wanderTarget;
+            // Add the wanderdistance 
+            wanderTarget.Add(new Vector2D(wanderDistance, 0));
+
+            // Officialy wandertarget is localspace and it has to become world space
+            ME.MyWorld.Target.Pos = wanderTarget.Clone().Add(ME.Pos);
 
             // Wander to the position
             return wanderTarget.Clone().Sub(ME.Pos);
