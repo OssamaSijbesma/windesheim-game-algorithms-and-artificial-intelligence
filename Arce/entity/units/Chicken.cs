@@ -21,18 +21,18 @@ namespace Arce.entity
 
         public override void Render(Graphics g)
         {
-            Rectangle region;
+            Rectangle region = new Rectangle(96, 0, 16, 16);
 
             if (Heading.X > 0.5)
-                region = new Rectangle(16, 0, 16, 16);
+                region.X = 16;
             else if (Heading.X < -0.5)
-                region = new Rectangle(48, 0, 16, 16);
+                region.X = 48;
             else if (Heading.Y > 0.5)
-                region = new Rectangle(32, 0, 16, 16);
+                region.X = 32;
             else if (Heading.Y < -0.5)
-                region = new Rectangle(0, 0, 16, 16);
+                region.X = 0;
             else
-                region = new Rectangle(0, 16, 16, 16);
+                region.X = 96;
 
             g.DrawImage(_sprite, (int) Pos.X, (int) Pos.Y, region, GraphicsUnit.Pixel);
         }

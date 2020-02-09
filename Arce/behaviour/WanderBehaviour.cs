@@ -20,17 +20,26 @@ namespace Arce.behaviour
         public override Vector2D Calculate()
         {
             Random random = new Random();
-            Vector2D wanderTarget = new Vector2D(random.Next(-1, 1) * wanderJitter, random.Next(-1, 1) * wanderJitter);
 
+            Vector2D wanderTarget = new Vector2D(RandomDirection(random) * wanderJitter, RandomDirection(random) * wanderJitter);
+
+            // Reproject this new vector back onto a unit circle.
             wanderTarget.Normalize();
-            wanderTarget = wanderTarget.Multiply(wanderRadius);
 
-            Vector2D targetLocal = wanderTarget.Add(new Vector2D(wanderDistance, 0));
+            // Increase the length of the vector to the same as the radius of the wander circle.
+            wanderTarget.Multiply(wanderRadius);
 
-            // to do
+            // Set world target
+            //ME.MyWorld.Target.Pos = wanderTarget;
 
-            return targetLocal.Sub(ME.Pos);
-            
+            // Wander to the position
+            return wanderTarget.Clone().Sub(ME.Pos);
+        }
+
+        private static double RandomDirection(Random random) 
+        {
+            double next = random.NextDouble();
+            return -1 + (next * 2);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Arce.entity
             Mass = 20;
             MaxSpeed = 100;
             Velocity = new Vector2D();
+            Heading = new Vector2D();
         }
 
         public override void Update(float timeElapsed)
