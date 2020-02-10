@@ -11,6 +11,7 @@ namespace Arce.entity
         public Vector2D Velocity { get; set; }
         public float Mass { get; set; }
         public Vector2D Heading { get; set; }
+        public Vector2D Side { get; set; }
         public float MaxSpeed { get; set; }
         public SteeringBehaviour SteeringBehaviour { get; set; }
         public LinkedList<Vector2D> Targets { get; set; }
@@ -18,7 +19,7 @@ namespace Arce.entity
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
             Mass = 20;
-            MaxSpeed = 100;
+            MaxSpeed = 20;
             Velocity = new Vector2D();
             Heading = new Vector2D();
         }
@@ -44,6 +45,7 @@ namespace Arce.entity
             if (Velocity.LengthSquared() > 0) 
             {
                 Heading = Velocity.Clone().Normalize();
+                Side = Heading.Perpendicular();
             }
         }
 

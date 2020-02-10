@@ -78,7 +78,12 @@ namespace Arce
             }
             return this;
         }
-        
+
+        public Vector2D Perpendicular()
+        {
+            return new Vector2D(-this.Y, this.X);
+        }
+
         public Vector2D Clone()
         {
             return new Vector2D(this.X, this.Y);

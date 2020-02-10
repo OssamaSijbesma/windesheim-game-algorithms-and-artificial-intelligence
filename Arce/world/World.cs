@@ -44,7 +44,7 @@ namespace Arce
         {
             foreach (MovingEntity me in entities)
             {
-                me.SteeringBehaviour = new SeekBehaviour(me); // restore later
+                me.SteeringBehaviour = new WanderBehaviour(me); // restore later
                 me.Update(timeElapsed);
             }  
         }
