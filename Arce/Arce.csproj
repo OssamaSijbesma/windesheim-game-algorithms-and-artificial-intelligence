@@ -53,6 +53,8 @@
     <Compile Include="DBPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="entity\Buildings\Castle.cs" />
+    <Compile Include="entity\Buildings\Mine.cs" />
     <Compile Include="entity\units\Chicken.cs" />
     <Compile Include="entity\units\Knight.cs" />
     <Compile Include="entity\MovingEntity.cs" />
