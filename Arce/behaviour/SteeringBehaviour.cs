@@ -9,12 +9,12 @@ namespace Arce
 {
     abstract class SteeringBehaviour
     {
-        public MovingEntity ME { get; set; }
+        public MovingEntity MovingEntity { get; set; }
         public abstract Vector2D Calculate();
 
-        public SteeringBehaviour(MovingEntity me)
+        public SteeringBehaviour(MovingEntity movingEntity)
         {
-            ME = me;
+            MovingEntity = movingEntity;
         }
     }
 }

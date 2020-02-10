@@ -15,7 +15,7 @@ namespace Arce.entity
         {
             Scale = 5;
             Mass = 10;
-            MaxSpeed = 5;
+            MaxSpeed = 40;
             _sprite = Image.FromFile("../../assets/sprites/chicken.png");
         }
 

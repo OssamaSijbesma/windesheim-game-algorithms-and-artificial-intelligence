@@ -15,8 +15,8 @@ namespace Arce.behaviour
 
         public override Vector2D Calculate()
         {
-            Vector2D desiredVelocity = ME.MyWorld.Target.Pos.Clone().Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
-            return desiredVelocity.Sub(ME.Velocity);
+            Vector2D desiredVelocity = MovingEntity.MyWorld.Target.Pos.Clone().Sub(MovingEntity.Pos).Normalize().Multiply(MovingEntity.MaxSpeed);
+            return desiredVelocity.Sub(MovingEntity.Velocity);
         }
     }
 }

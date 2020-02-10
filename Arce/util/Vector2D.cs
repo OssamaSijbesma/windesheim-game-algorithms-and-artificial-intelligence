@@ -52,7 +52,7 @@ namespace Arce
             return this;
         }
 
-        public Vector2D divide(double value)
+        public Vector2D Divide(double value)
         {
             if (value <= 0)
                 throw new ArgumentNullException();
@@ -69,12 +69,12 @@ namespace Arce
             return this;
         }
 
-        public Vector2D Truncate(double maX)
+        public Vector2D Truncate(double max)
         {
-            if (Length() > maX)
+            if (Length() > max)
             {
                 Normalize();
-                Multiply(maX);
+                Multiply(max);
             }
             return this;
         }

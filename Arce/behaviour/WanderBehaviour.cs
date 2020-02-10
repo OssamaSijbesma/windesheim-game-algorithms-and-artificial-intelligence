@@ -33,10 +33,10 @@ namespace Arce.behaviour
             wanderTarget.Add(new Vector2D(wanderDistance, 0));
 
             // Officialy wandertarget is localspace and it has to become world space
-            ME.MyWorld.Target.Pos = wanderTarget.Clone().Add(ME.Pos);
+            MovingEntity.MyWorld.Target.Pos = wanderTarget.Clone().Add(MovingEntity.Pos);
 
             // Wander to the position
-            return wanderTarget.Clone().Sub(ME.Pos);
+            return wanderTarget.Clone().Sub(MovingEntity.Pos);
         }
 
         private static double RandomDirection(Random random) 

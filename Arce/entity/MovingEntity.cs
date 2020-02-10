@@ -12,8 +12,8 @@ namespace Arce.entity
         public float Mass { get; set; }
         public Vector2D Heading { get; set; }
         public float MaxSpeed { get; set; }
-
-        public SteeringBehaviour SB { get; set; }
+        public SteeringBehaviour SteeringBehaviour { get; set; }
+        public LinkedList<Vector2D> Targets { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
@@ -26,10 +26,10 @@ namespace Arce.entity
         public override void Update(float timeElapsed)
         {
             // Calculate the combined force from each steering behaviour.
-            Vector2D steeringForce = SB.Calculate();
+            Vector2D steeringForce = SteeringBehaviour.Calculate();
 
             // Acceleration = Force / Mass (Newton's laws of physics).
-            Vector2D acceleration = steeringForce.Clone().divide(Mass);
+            Vector2D acceleration = steeringForce.Clone().Divide(Mass);
 
             // Update velocity.
             Velocity.Add(acceleration.Clone().Multiply(timeElapsed));
