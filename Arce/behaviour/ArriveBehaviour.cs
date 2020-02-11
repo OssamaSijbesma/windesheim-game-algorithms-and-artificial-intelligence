@@ -15,25 +15,7 @@ namespace Arce.behaviour
 
         public override Vector2D Calculate()
         {
-            Vector2D toTarget = MovingEntity.MyWorld.Target.Pos.Clone().Sub(MovingEntity.Pos.Clone());
-            double distance = toTarget.Length();
-
-            if (distance > 0)
-            {
-                // fine tweaking of deceleration
-                const double decelerationTweaker = 4;
-
-                // calculate the speed required to reach the target
-                double speed = distance / (1 * decelerationTweaker);
-
-                // make sure velocity doesn't exceed the MaxSpeed
-                speed = Math.Min(speed, MovingEntity.MaxSpeed);
-
-                Vector2D desiredVelocity = toTarget.Multiply(speed / distance);
-                return desiredVelocity.Sub(MovingEntity.Velocity.Clone());
-            }
-
-            return new Vector2D(0, 0);
+            return SteeringBehaviours.Arrive(MovingEntity, MovingEntity.MyWorld.Target.Pos);
         }
     }
 }
