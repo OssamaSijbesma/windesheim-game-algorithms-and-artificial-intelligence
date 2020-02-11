@@ -14,7 +14,7 @@ namespace Arce.entity
         public Chicken(Vector2D pos, World w) : base(pos, w)
         {
             Mass = 20;
-            MaxSpeed = 20;
+            MaxSpeed = 5;
             _sprite = Image.FromFile("../../assets/sprites/chicken.png");
         }
 
