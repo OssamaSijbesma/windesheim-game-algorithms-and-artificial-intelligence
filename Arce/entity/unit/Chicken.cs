@@ -13,9 +13,8 @@ namespace Arce.entity
 
         public Chicken(Vector2D pos, World w) : base(pos, w)
         {
-            Scale = 5;
-            Mass = 10;
-            MaxSpeed = 40;
+            Mass = 20;
+            MaxSpeed = 20;
             _sprite = Image.FromFile("../../assets/sprites/chicken.png");
         }
 
@@ -34,7 +33,6 @@ namespace Arce.entity
             else
                 region.X = 96;
 
-            Pen blackPen = new Pen(Color.Black, 3);
             g.DrawImage(_sprite, (int) Pos.X-8, (int) Pos.Y-8, region, GraphicsUnit.Pixel);
         }
     }
