@@ -56,10 +56,11 @@
     </Compile>
     <Compile Include="entity\building\Castle.cs" />
     <Compile Include="entity\building\Mine.cs" />
+    <Compile Include="entity\building\Tent.cs" />
+    <Compile Include="entity\building\Tree.cs" />
+    <Compile Include="entity\StaticEntity.cs" />
     <Compile Include="entity\unit\Chicken.cs" />
-    <Compile Include="entity\unit\Knight.cs" />
     <Compile Include="entity\MovingEntity.cs" />
-    <Compile Include="entity\unit\Villager.cs" />
     <Compile Include="entity\Vehicle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -99,6 +100,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\Tent.png" />
     <Content Include="assets\sprites\chicken.png" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

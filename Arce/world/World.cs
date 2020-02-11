@@ -1,5 +1,6 @@
 ﻿using Arce.behaviour;
 using Arce.entity;
+using Arce.entity.building;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +12,9 @@ namespace Arce
 {
     class World
     {
-        private List<MovingEntity> entities = new List<MovingEntity>();
+        private List<MovingEntity> movingEntities = new List<MovingEntity>();
+
+        private List<StaticEntity> staticEntities = new List<StaticEntity>();
         public Vehicle Target { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -20,7 +23,14 @@ namespace Arce
         {
             Width = w;
             Height = h;
+            generateMap();
             populate();
+        }
+
+        private void generateMap()
+        {
+            Tent tent = new Tent(new Vector2D(280, 180), this);
+            staticEntities.Add(tent);
         }
 
         private void populate()
@@ -28,12 +38,10 @@ namespace Arce
             /*Vehicle v = new Vehicle(new Vector2D(10,10), this);
             v.VColor = Color.Blue;
             entities.Add(v);
-
-            Knight knight = new Knight(new Vector2D(50, 50), this);
-            entities.Add(knight);
             */
+
             Chicken chicken = new Chicken(new Vector2D(100, 100), this);
-            entities.Add(chicken);
+            movingEntities.Add(chicken);
 
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
@@ -42,16 +50,17 @@ namespace Arce
 
         public void Update(float timeElapsed)
         {
-            foreach (MovingEntity me in entities)
+            foreach (MovingEntity me in movingEntities)
             {
-                me.SteeringBehaviour = new FleeBehaviour(me); // restore later
+                me.SteeringBehaviour = new ArriveBehaviour(me);
                 me.Update(timeElapsed);
             }  
         }
 
         public void Render(Graphics g)
         {
-            entities.ForEach(e => e.Render(g));
+            movingEntities.ForEach(e => e.Render(g));
+            staticEntities.ForEach(s => s.Render(g));
             Target.Render(g);
         }
     }
