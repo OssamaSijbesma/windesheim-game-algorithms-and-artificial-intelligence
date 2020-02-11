@@ -15,6 +15,7 @@ namespace Arce.entity
         public float MaxSpeed { get; set; }
         public SteeringBehaviour SteeringBehaviour { get; set; }
         public LinkedList<Vector2D> Targets { get; set; }
+        public bool Tag { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
@@ -46,6 +47,19 @@ namespace Arce.entity
             {
                 Heading = Velocity.Clone().Normalize();
                 Side = Heading.Perpendicular();
+            }
+        }
+
+        public void TagNeighbours(MovingEntity centralEntity, List<MovingEntity> movingEntities, double radius) 
+        {
+            foreach (MovingEntity entity in movingEntities)
+            {
+                entity.Tag = false;
+
+                Vector2D to = entity.Pos.Clone().Sub(centralEntity.Pos);
+
+                if (entity != centralEntity &&  to.LengthSquared() < radius * radius)
+                    entity.Tag = true;
             }
         }
 
