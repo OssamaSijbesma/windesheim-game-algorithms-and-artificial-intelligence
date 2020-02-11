@@ -34,7 +34,8 @@ namespace Arce.entity
             else
                 region.X = 96;
 
-            g.DrawImage(_sprite, (int) Pos.X, (int) Pos.Y, region, GraphicsUnit.Pixel);
+            Pen blackPen = new Pen(Color.Black, 3);
+            g.DrawImage(_sprite, (int) Pos.X-8, (int) Pos.Y-8, region, GraphicsUnit.Pixel);
         }
     }
 }
