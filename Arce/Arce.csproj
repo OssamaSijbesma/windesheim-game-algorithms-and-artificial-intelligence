@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="behaviour\AlignmentBehaviour.cs" />
     <Compile Include="behaviour\ArriveBehaviour.cs" />
     <Compile Include="behaviour\WanderBehaviour.cs" />
     <Compile Include="entity\BaseGameEntity.cs" />
