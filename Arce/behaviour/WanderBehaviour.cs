@@ -9,9 +9,9 @@ namespace Arce.behaviour
 {
     class WanderBehaviour : SteeringBehaviour
     {
-        double wanderRadius = 25;
-        double wanderDistance = 50;
-        double wanderJitter = 5;
+        double wanderRadius = 5;
+        double wanderDistance = 4;
+        double wanderJitter = 50;
 
         public WanderBehaviour(MovingEntity me) : base(me)
         {
@@ -44,5 +44,26 @@ namespace Arce.behaviour
             double next = random.NextDouble();
             return -1 + (next * 2);
         }
+        /*
+        private static Vector2D PointToWorldSpace(Vector2D point, Vector2D heading, Vector2D side, Vector2D pos) 
+        {
+            //make a copy of the point
+            Vector2D TransPoint = point;
+
+            //create a transformation matrix
+            C2DMatrix matTransform;
+
+            //rotate
+            matTransform.Rotate(heading, side);
+
+            //and translate
+            matTransform.Translate(pos.X, pos.Y);
+
+            //now transform the vertices
+            matTransform.TransformVector2Ds(TransPoint);
+
+            return TransPoint;
+        }
+        */
     }
 }
