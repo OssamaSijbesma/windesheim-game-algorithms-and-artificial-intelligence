@@ -54,11 +54,14 @@ namespace Arce.entity
         {
             foreach (MovingEntity entity in movingEntities)
             {
+                // Clear current tag.
                 entity.Tag = false;
 
-                Vector2D to = entity.Pos.Clone().Sub(centralEntity.Pos);
+                // Calculate the difference in space
+                Vector2D difference = entity.Pos.Clone().Sub(centralEntity.Pos);
 
-                if (entity != centralEntity &&  to.LengthSquared() < radius * radius)
+                // When the entity is in range it gets tageed.
+                if (entity != centralEntity &&  difference.LengthSquared() < radius * radius)
                     entity.Tag = true;
             }
         }
