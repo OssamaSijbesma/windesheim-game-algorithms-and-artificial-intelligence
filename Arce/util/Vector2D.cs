@@ -54,7 +54,7 @@ namespace Arce
 
         public Vector2D Divide(double value)
         {
-            if (value <= 0)
+            if (value == 0)
                 throw new ArgumentNullException();
 
             this.X /= value;

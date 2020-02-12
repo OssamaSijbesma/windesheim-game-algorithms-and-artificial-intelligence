@@ -19,8 +19,8 @@ namespace Arce.entity
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
-            Mass = 20;
-            MaxSpeed = 20;
+            Mass = 60;
+            MaxSpeed = 40;
             Velocity = new Vector2D();
             Heading = new Vector2D();
         }

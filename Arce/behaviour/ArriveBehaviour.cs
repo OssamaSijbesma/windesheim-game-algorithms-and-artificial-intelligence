@@ -9,7 +9,7 @@ namespace Arce.behaviour
 {
     class ArriveBehaviour : SteeringBehaviour
     {
-        public ArriveBehaviour(MovingEntity me) : base(me)
+        public ArriveBehaviour(MovingEntity movingEntity) : base(movingEntity)
         { 
         }
 

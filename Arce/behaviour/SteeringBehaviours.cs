@@ -45,10 +45,12 @@ namespace Arce.behaviour
 
         public static Vector2D Separation(MovingEntity entity, List<MovingEntity> neighbours) 
         {
-            Vector2D steeringForce = new Vector2D();
+            Vector2D steeringForce = new Vector2D(0, 0);
 
             foreach (MovingEntity neighbour in neighbours)
             {
+                if (neighbour.Tag == false)
+                    continue;
                 Vector2D ToAgent = entity.Pos.Clone().Sub(neighbour.Pos);
                 steeringForce.Add(ToAgent.Clone().Normalize().Divide(ToAgent.Length()));
             }
@@ -58,11 +60,14 @@ namespace Arce.behaviour
 
         public static Vector2D Alignment(MovingEntity entity, List<MovingEntity> neighbours)
         {
-            Vector2D averageHeading = new Vector2D();
+            Vector2D averageHeading = new Vector2D(0, 0);
             int neighbourCount = 0;
 
             foreach (MovingEntity neighbour in neighbours)
             {
+                if (neighbour.Tag == false)
+                    continue;
+
                 averageHeading.Add(neighbour.Heading);
                 neighbourCount++;
             }
@@ -78,12 +83,15 @@ namespace Arce.behaviour
 
         public static Vector2D Cohesion(MovingEntity entity, List<MovingEntity> neighbours)
         {
-            Vector2D centerOfMass = new Vector2D();
-            Vector2D steeringForce = new Vector2D();
+            Vector2D centerOfMass = new Vector2D(0, 0);
+            Vector2D steeringForce = new Vector2D(0, 0);
             int neighbourCount = 0;
 
             foreach (MovingEntity neighbour in neighbours)
             {
+                if (neighbour.Tag == false)
+                    continue;
+
                 centerOfMass.Add(neighbour.Pos);
                 neighbourCount++;
             }

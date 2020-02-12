@@ -42,17 +42,40 @@ namespace Arce
 
             Chicken chicken = new Chicken(new Vector2D(100, 100), this);
             movingEntities.Add(chicken);
+            Chicken chicken2 = new Chicken(new Vector2D(100, 110), this);
+            movingEntities.Add(chicken2);
+            Chicken chicken3 = new Chicken(new Vector2D(110, 105), this);
+            movingEntities.Add(chicken3);
 
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
             Target.Pos = new Vector2D(100, 40);
         }
 
+        public void TagNeighbours(MovingEntity centralEntity, double radius)
+        {
+            foreach (MovingEntity entity in movingEntities)
+            {
+                // Clear current tag.
+                entity.Tag = false;
+
+                // Calculate the difference in space
+                Vector2D difference = entity.Pos.Clone().Sub(centralEntity.Pos);
+
+                // When the entity is in range it gets tageed.
+                if (entity != centralEntity && difference.LengthSquared() < radius * radius)
+                    entity.Tag = true;
+            }
+        }
+
+        public List<MovingEntity> GetMovingEntities() => movingEntities;
+
+
         public void Update(float timeElapsed)
         {
             foreach (MovingEntity me in movingEntities)
             {
-                me.SteeringBehaviour = new ArriveBehaviour(me);
+                me.SteeringBehaviour = new FlockingBehaviour(me);
                 me.Update(timeElapsed);
             }  
         }
