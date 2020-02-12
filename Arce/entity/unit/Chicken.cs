@@ -11,7 +11,7 @@ namespace Arce.entity
     {
         private Image _sprite;
 
-        public Chicken(Vector2D pos, World w) : base(pos, w)
+        public Chicken(Vector2D pos) : base(pos)
         {
             Mass = 20;
             MaxSpeed = 5;

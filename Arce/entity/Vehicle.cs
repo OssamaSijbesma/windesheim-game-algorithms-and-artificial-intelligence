@@ -11,7 +11,7 @@ namespace Arce.entity
     {
         public Color VColor { get; set; }
 
-        public Vehicle(Vector2D pos, World w) : base(pos, w)
+        public Vehicle(Vector2D pos) : base(pos)
         {
             Velocity = new Vector2D(0, 0);
             Scale = 5;

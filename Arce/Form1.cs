@@ -21,7 +21,7 @@ namespace Arce
         {
             InitializeComponent();
 
-            world = new World(w: dbPanel1.Width, h: dbPanel1.Height);
+            world = World.Instance;
 
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Elapsed;

@@ -10,7 +10,7 @@ namespace Arce.entity.building
     class Tent : StaticEntity
     {
         private Image _image;
-        public Tent(Vector2D pos, World w) : base(pos, w)
+        public Tent(Vector2D pos) : base(pos)
         {
             _image = Image.FromFile("../../assets/images/Tent.png");
         }

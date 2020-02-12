@@ -9,7 +9,7 @@ namespace Arce.entity
 {
     abstract class StaticEntity : BaseGameEntity
     {
-        public StaticEntity(Vector2D pos, World w) : base(pos, w) 
+        public StaticEntity(Vector2D pos) : base(pos) 
         { 
         }
 

@@ -17,7 +17,7 @@ namespace Arce.entity
         public LinkedList<Vector2D> Targets { get; set; }
         public bool Tag { get; set; }
 
-        public MovingEntity(Vector2D pos, World w) : base(pos, w)
+        public MovingEntity(Vector2D pos) : base(pos)
         {
             Mass = 60;
             MaxSpeed = 40;

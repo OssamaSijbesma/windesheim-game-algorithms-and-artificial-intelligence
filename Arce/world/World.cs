@@ -12,24 +12,39 @@ namespace Arce
 {
     class World
     {
-        private List<MovingEntity> movingEntities = new List<MovingEntity>();
+        private static World instance;
+        private static readonly object padlock = new object();
 
+        private List<MovingEntity> movingEntities = new List<MovingEntity>();
         private List<StaticEntity> staticEntities = new List<StaticEntity>();
         public Vehicle Target { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public World(int w, int h)
+        private World()
         {
-            Width = w;
-            Height = h;
+            Width = 800;
+            Height = 800;
             generateMap();
             populate();
         }
 
+        public static World Instance
+        {
+            get 
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                        instance = new World();
+                    return instance;
+                }
+            }
+        }
+
         private void generateMap()
         {
-            Tent tent = new Tent(new Vector2D(280, 180), this);
+            Tent tent = new Tent(new Vector2D(280, 180));
             staticEntities.Add(tent);
         }
 
@@ -40,14 +55,14 @@ namespace Arce
             entities.Add(v);
             */
 
-            Chicken chicken = new Chicken(new Vector2D(100, 100), this);
+            Chicken chicken = new Chicken(new Vector2D(100, 100));
             movingEntities.Add(chicken);
-            Chicken chicken2 = new Chicken(new Vector2D(100, 110), this);
+            Chicken chicken2 = new Chicken(new Vector2D(100, 130));
             movingEntities.Add(chicken2);
-            Chicken chicken3 = new Chicken(new Vector2D(110, 105), this);
+            Chicken chicken3 = new Chicken(new Vector2D(110, 105));
             movingEntities.Add(chicken3);
 
-            Target = new Vehicle(new Vector2D(100, 60), this);
+            Target = new Vehicle(new Vector2D(100, 60));
             Target.VColor = Color.DarkRed;
             Target.Pos = new Vector2D(100, 40);
         }
@@ -69,7 +84,6 @@ namespace Arce
         }
 
         public List<MovingEntity> GetMovingEntities() => movingEntities;
-
 
         public void Update(float timeElapsed)
         {

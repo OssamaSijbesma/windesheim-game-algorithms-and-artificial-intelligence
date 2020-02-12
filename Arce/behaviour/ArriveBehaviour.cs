@@ -15,7 +15,7 @@ namespace Arce.behaviour
 
         public override Vector2D Calculate()
         {
-            return SteeringBehaviours.Arrive(MovingEntity, MovingEntity.MyWorld.Target.Pos);
+            return SteeringBehaviours.Arrive(MovingEntity, World.Instance.Target.Pos);
         }
     }
 }
