@@ -17,20 +17,20 @@ namespace Arce.behaviour
         public FlockingBehaviour(MovingEntity movingEntity) : base(movingEntity)
         {
             maxSteeringForce = 5;
-            separationAmount = 50;
+            separationAmount = 100;
             cohesionAmount = 2;
-            alignmentAmount = 0.5;
+            alignmentAmount = 1;
         }
 
         public override Vector2D Calculate()
         {
             Vector2D steeringForce = new Vector2D(0, 0);
-            World.Instance.TagNeighbours(MovingEntity, 20);
+            World.Instance.TagNeighbours(MovingEntity, 100);
             List<MovingEntity> entities = World.Instance.GetMovingEntities();
 
-            steeringForce.Add(SteeringBehaviours.Separation(MovingEntity, entities).Multiply(separationAmount));
             steeringForce.Add(SteeringBehaviours.Cohesion(MovingEntity, entities).Multiply(cohesionAmount));
             steeringForce.Add(SteeringBehaviours.Alignment(MovingEntity, entities).Multiply(alignmentAmount));
+            steeringForce.Add(SteeringBehaviours.Separation(MovingEntity, entities).Multiply(separationAmount));
 
             return steeringForce.Truncate(maxSteeringForce);
         }

@@ -54,13 +54,10 @@ namespace Arce
             v.VColor = Color.Blue;
             entities.Add(v);
             */
+            MovingEntityFactory chickenFactory = new ChickenFactory();
 
-            Chicken chicken = new Chicken(new Vector2D(100, 100));
-            movingEntities.Add(chicken);
-            Chicken chicken2 = new Chicken(new Vector2D(100, 130));
-            movingEntities.Add(chicken2);
-            Chicken chicken3 = new Chicken(new Vector2D(110, 105));
-            movingEntities.Add(chicken3);
+
+            movingEntities.AddRange(chickenFactory.GetMovingEntities(300));
 
             Target = new Vehicle(new Vector2D(100, 60));
             Target.VColor = Color.DarkRed;

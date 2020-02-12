@@ -59,9 +59,11 @@
     <Compile Include="entity\building\Mine.cs" />
     <Compile Include="entity\building\Tent.cs" />
     <Compile Include="entity\building\Tree.cs" />
+    <Compile Include="entity\MovingEntityFactory.cs" />
     <Compile Include="entity\StaticEntity.cs" />
     <Compile Include="entity\unit\Chicken.cs" />
     <Compile Include="entity\MovingEntity.cs" />
+    <Compile Include="entity\unit\ChickenFactory.cs" />
     <Compile Include="entity\Vehicle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
