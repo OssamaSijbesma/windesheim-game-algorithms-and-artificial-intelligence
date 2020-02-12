@@ -57,7 +57,7 @@ namespace Arce
             MovingEntityFactory chickenFactory = new ChickenFactory();
 
 
-            movingEntities.AddRange(chickenFactory.GetMovingEntities(300));
+            movingEntities.AddRange(chickenFactory.GetMovingEntities(800));
 
             Target = new Vehicle(new Vector2D(100, 60));
             Target.VColor = Color.DarkRed;

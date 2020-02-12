@@ -49,8 +49,9 @@ namespace Arce.behaviour
 
             foreach (MovingEntity neighbour in neighbours)
             {
-                if (neighbour.Tag == false)
+                if (neighbour.Tag == false || entity.Pos == neighbour.Pos)
                     continue;
+
                 Vector2D ToAgent = entity.Pos.Clone().Sub(neighbour.Pos);
                 steeringForce.Add(ToAgent.Clone().Normalize().Divide(ToAgent.Length()));
             }
