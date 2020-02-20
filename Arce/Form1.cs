@@ -21,6 +21,7 @@ namespace Arce
         {
             InitializeComponent();
 
+            
             world = World.Instance;
 
             timer = new System.Timers.Timer();

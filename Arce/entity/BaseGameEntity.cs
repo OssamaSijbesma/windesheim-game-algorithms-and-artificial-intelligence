@@ -16,7 +16,7 @@ namespace Arce
 
         public virtual void Render(Graphics g)
         {
-            g.FillEllipse(Brushes.Blue, new Rectangle((int) Pos.X,(int) Pos.Y, 10, 10));
+            g.FillEllipse(Brushes.Blue, new Rectangle((int) Pos.X,(int) Pos.Y, 16, 16));
         }
     }
 }

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +47,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TiledLib, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TiledLib.3.2.0\lib\net45\TiledLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="behaviour\ArriveBehaviour.cs" />
@@ -55,15 +61,16 @@
     <Compile Include="DBPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="entity\building\Castle.cs" />
-    <Compile Include="entity\building\Mine.cs" />
-    <Compile Include="entity\building\Tent.cs" />
-    <Compile Include="entity\building\Tree.cs" />
+    <Compile Include="entity\static\Castle.cs" />
+    <Compile Include="entity\static\MapTile.cs" />
+    <Compile Include="entity\static\Mine.cs" />
+    <Compile Include="entity\static\Tent.cs" />
+    <Compile Include="entity\static\Tree.cs" />
     <Compile Include="entity\MovingEntityFactory.cs" />
     <Compile Include="entity\StaticEntity.cs" />
-    <Compile Include="entity\unit\Chicken.cs" />
+    <Compile Include="entity\moving\Chicken.cs" />
     <Compile Include="entity\MovingEntity.cs" />
-    <Compile Include="entity\unit\ChickenFactory.cs" />
+    <Compile Include="entity\moving\ChickenFactory.cs" />
     <Compile Include="entity\Vehicle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -79,6 +86,7 @@
     <Compile Include="behaviour\SteeringBehaviour.cs" />
     <Compile Include="util\Vector2D.cs" />
     <Compile Include="world\World.cs" />
+    <Compile Include="world\WorldBuilder.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +100,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="assets\map\structure.tmx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\Tent.png" />
+    <Content Include="assets\map\OutdoorsTileset.png" />
     <Content Include="assets\sprites\chicken.png" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +133,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="assets\map\Outdoor.tsx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
