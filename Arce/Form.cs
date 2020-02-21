@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arce.world;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,19 +11,21 @@ using System.Windows.Forms;
 
 namespace Arce
 {
-    public partial class Form1 : Form
+    public partial class Form : System.Windows.Forms.Form
     {
-        World world;
+        private World world;
+        private WorldMap worldMap;
         System.Timers.Timer timer;
 
         public const float timeDelta = 0.8f;
         
-        public Form1()
+        public Form()
         {
             InitializeComponent();
-
             
             world = World.Instance;
+            worldMap = WorldMap.Instance;
+            staticPanel.Paint += Draw;
 
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Elapsed;
@@ -33,7 +36,11 @@ namespace Arce
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             world.Update(timeDelta);
-            dbPanel1.Invalidate();
+            dbPanel.Invalidate();
+        }
+        private void Draw(object sender, PaintEventArgs e)
+        {
+            worldMap.Render(e.Graphics);
         }
 
         private void dbPanel1_Paint(object sender, PaintEventArgs e)

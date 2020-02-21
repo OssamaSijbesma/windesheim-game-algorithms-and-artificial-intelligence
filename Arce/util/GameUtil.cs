@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TiledLib;
-using TiledLib.Layer;
 
-namespace Arce.world
+namespace Arce
 {
-    static class WorldBuilder
+    static class GameUtil
     {
         public static Bitmap cropAtRect(this Bitmap bitmap, int x, int y)
         {

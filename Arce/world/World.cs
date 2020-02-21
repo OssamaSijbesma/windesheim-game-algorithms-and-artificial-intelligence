@@ -19,46 +19,14 @@ namespace Arce
     {
         private static World instance;
         private static readonly object padlock = new object();
-        private static readonly string mapPath = "../../assets/map/";
 
         private List<MovingEntity> movingEntities = new List<MovingEntity>();
         private List<StaticEntity> staticEntities = new List<StaticEntity>();
+
         public Vehicle Target { get; set; }
 
         private World()
         {
-            // Preload the tile images
-            Bitmap image = new Bitmap(mapPath + "OutdoorsTileset.png", false);
-            Bitmap[] bitmaps = new Bitmap[54];
-            for (int y = 0, i = 0; y < image.Height; y += 16)
-                for (int x = 0; x < image.Width; x += 16, i++)
-                    bitmaps[i] = WorldBuilder.cropAtRect(image, x, y);
-
-            // Reads the file and creates the tiles
-            using (System.IO.FileStream stream = File.OpenRead(mapPath + "structure.tmx"))
-            {
-                Map map = Map.FromStream(stream, ts => File.OpenRead(Path.Combine(Path.GetDirectoryName(mapPath + "structure.tmx"), ts.Source)));
-
-                foreach (TileLayer layer in map.Layers.OfType<TileLayer>())
-                {
-                    for (int y = 0, i = 0; y < layer.Height; y++)
-                        for (int x = 0; x < layer.Width; x++, i++)
-                        {
-                            int gid = layer.Data[i];
-
-                            if (gid == 0)
-                                continue;
-
-                            //ITileset tileset = map.Tilesets.Single(ts => gid >= ts.FirstGid && ts.FirstGid + ts.TileCount > gid);
-
-                            //Tile tile = tileset[gid];
-
-                            MapTile mapTile = new MapTile(new Vector2D(x * 16, y * 16), bitmaps[gid - 1]);
-                            staticEntities.Add(mapTile);
-                        }
-                }
-            }
-
             // Set tent
             Tent tent = new Tent(new Vector2D(280, 180));
             staticEntities.Add(tent);
