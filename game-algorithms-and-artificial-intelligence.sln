@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture01 Steering", "Lectu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arce", "Arce\Arce.csproj", "{BD8FDAB6-AD66-4016-9822-54D62FD786C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture03 Finite State Machine", "Lecture03 Finite State Machine\Lecture03 Finite State Machine.csproj", "{C8B1C518-B498-49AD-AABB-90110DCB2666}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BD8FDAB6-AD66-4016-9822-54D62FD786C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD8FDAB6-AD66-4016-9822-54D62FD786C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD8FDAB6-AD66-4016-9822-54D62FD786C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
