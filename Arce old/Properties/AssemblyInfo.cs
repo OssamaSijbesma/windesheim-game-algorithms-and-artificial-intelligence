@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Arce")]
-[assembly: AssemblyProduct("Arce")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("SteeringCS")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Windesheim")]
+[assembly: AssemblyProduct("SteeringCS")]
+[assembly: AssemblyCopyright("Copyright © Windesheim 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5fc144a9-7eb0-4d73-aba8-a72e9b0079b3")]
+[assembly: Guid("bd179484-1369-4437-bd3b-4aecfb627286")]
 
 // Version information for an assembly consists of the following four values:
 //

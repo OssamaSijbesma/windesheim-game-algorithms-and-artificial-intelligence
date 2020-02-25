@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture01 Steering", "Lecture01 Steering\Lecture01 Steering.csproj", "{BD179484-1369-4437-BD3B-4AECFB627286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arce", "Arce\Arce.csproj", "{BD8FDAB6-AD66-4016-9822-54D62FD786C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arce old", "Arce old\Arce old.csproj", "{BD8FDAB6-AD66-4016-9822-54D62FD786C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture03 Finite State Machine", "Lecture03 Finite State Machine\Lecture03 Finite State Machine.csproj", "{C8B1C518-B498-49AD-AABB-90110DCB2666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lecture03 Finite State Machine", "Lecture03 Finite State Machine\Lecture03 Finite State Machine.csproj", "{C8B1C518-B498-49AD-AABB-90110DCB2666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arce", "Arce\Arce.csproj", "{A4139F66-4429-46F9-94FB-1A3E5D539DD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B1C518-B498-49AD-AABB-90110DCB2666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4139F66-4429-46F9-94FB-1A3E5D539DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4139F66-4429-46F9-94FB-1A3E5D539DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4139F66-4429-46F9-94FB-1A3E5D539DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4139F66-4429-46F9-94FB-1A3E5D539DD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
