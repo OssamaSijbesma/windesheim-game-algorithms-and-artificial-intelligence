@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Graphics;
 
 namespace Arce
 {
@@ -11,7 +13,12 @@ namespace Arce
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+        // The tile map
+        private TiledMap map;
+        // The renderer for the map
+        private TiledMapRenderer mapRenderer;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -26,7 +33,10 @@ namespace Arce
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Load the compiled map
+            map = Content.Load<TiledMap>("WorldMap/structure.tmx");
+            // Create the map renderer
+            mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
             base.Initialize();
         }
@@ -62,7 +72,8 @@ namespace Arce
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            // Update the map
+            mapRenderer.Update(map, gameTime);
 
             base.Update(gameTime);
         }
@@ -73,6 +84,7 @@ namespace Arce
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            // Clear the screen
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here

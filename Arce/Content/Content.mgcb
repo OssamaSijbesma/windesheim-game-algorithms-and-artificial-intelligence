@@ -13,3 +13,25 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin WorldMap/Outdoor.tsx
+/importer:XmlImporter
+/processor:
+/build:WorldMap/Outdoor.tsx
+
+#begin WorldMap/spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:WorldMap/spritesheet.png
+
+#begin WorldMap/structure.tmx
+/importer:XmlImporter
+/processor:
+/build:WorldMap/structure.tmx
+
