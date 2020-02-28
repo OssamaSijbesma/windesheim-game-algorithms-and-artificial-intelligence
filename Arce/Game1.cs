@@ -16,12 +16,20 @@ namespace Arce
 
         // The tile map
         private TiledMap map;
+
         // The renderer for the map
         private TiledMapRenderer mapRenderer;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            // Adjust Size
+            graphics.PreferredBackBufferWidth = 1760;
+            graphics.PreferredBackBufferHeight = 960;
+            graphics.ApplyChanges();
+
+
             Content.RootDirectory = "Content";
         }
 
@@ -34,9 +42,14 @@ namespace Arce
         protected override void Initialize()
         {
             // Load the compiled map
-            map = Content.Load<TiledMap>("WorldMap/structure.tmx");
+            map = Content.Load<TiledMap>("WorldMap/structure");
+
+            // Make sure the graphicsdevice 
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+
             // Create the map renderer
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
+
 
             base.Initialize();
         }
@@ -87,7 +100,12 @@ namespace Arce
             // Clear the screen
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            
+
+            // map Should be the `TiledMap`
+            // Once again, the transform matrix is only needed if you have a Camera2D
+            mapRenderer.Draw(map);
+
 
             base.Draw(gameTime);
         }

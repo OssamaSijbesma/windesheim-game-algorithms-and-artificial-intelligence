@@ -10,13 +10,9 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\packages\MonoGame.Extended.Content.Pipeline.1.1.0\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
-
-#begin WorldMap/Outdoor.tsx
-/importer:XmlImporter
-/processor:
-/build:WorldMap/Outdoor.tsx
 
 #begin WorldMap/spritesheet.png
 /importer:TextureImporter
@@ -31,7 +27,7 @@
 /build:WorldMap/spritesheet.png
 
 #begin WorldMap/structure.tmx
-/importer:XmlImporter
-/processor:
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
 /build:WorldMap/structure.tmx
 
