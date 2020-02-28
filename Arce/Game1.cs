@@ -50,6 +50,8 @@ namespace Arce
             // Create the map renderer
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
+            // Display the mouse
+            this.IsMouseVisible = true;
 
             base.Initialize();
         }
