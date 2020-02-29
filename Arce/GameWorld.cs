@@ -4,14 +4,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace Arce
 {
-    public class GameWorld : Microsoft.Xna.Framework.Game
+    class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private static GameWorld instance = new GameWorld();
 
         private TiledMap map;
         private TiledMapRenderer mapRenderer;
@@ -27,9 +30,12 @@ namespace Arce
             graphics.PreferredBackBufferHeight = 960;
             graphics.ApplyChanges();
 
-
             Content.RootDirectory = "Content";
         }
+
+        public static GameWorld Instance => instance;
+
+        internal List<DynamicGameEntity> GetMovingEntities() => dynamicEntities;
 
         protected override void Initialize()
         {
@@ -85,8 +91,8 @@ namespace Arce
             // Draw the map
             mapRenderer.Draw(map);
 
-            spriteBatch.Begin();
             // Draw the entities
+            spriteBatch.Begin();
             staticEntities.ForEach(s => s.Draw(spriteBatch));
             dynamicEntities.ForEach(d => d.Draw(spriteBatch));
             spriteBatch.End();
@@ -94,23 +100,21 @@ namespace Arce
             base.Draw(gameTime);
         }
 
-        /*
         public void TagNeighbours(DynamicGameEntity centralEntity, double radius)
         {
-            foreach (DynamicGameEntity entity in movingEntities)
+            foreach (DynamicGameEntity entity in dynamicEntities)
             {
                 // Clear current tag.
                 entity.Tag = false;
 
                 // Calculate the difference in space
-                Vector2 difference = entity.Pos.Clone().Sub(centralEntity.Pos);
+                Vector2 difference = Vector2.Subtract(entity.Pos, centralEntity.Pos);
 
                 // When the entity is in range it gets tageed.
                 if (entity != centralEntity && difference.LengthSquared() < radius * radius)
                     entity.Tag = true;
             }
         }
-        */
 
     }
 }

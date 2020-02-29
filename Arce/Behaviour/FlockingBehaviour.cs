@@ -1,5 +1,6 @@
 ﻿using Arce.Entity;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +11,31 @@ namespace Arce.behaviour
 {
     class FlockingBehaviour : SteeringBehaviour
     {
-        private double maxSteeringForce;
-        private double separationAmount;
-        private double cohesionAmount;
-        private double alignmentAmount;
+        private float maxSteeringForce;
+        private float separationAmount;
+        private float cohesionAmount;
+        private float alignmentAmount;
 
         public FlockingBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
         {
-            maxSteeringForce = 5;
-            separationAmount = 100;
-            cohesionAmount = 2;
-            alignmentAmount = 1;
+            maxSteeringForce = 5.0F;
+            separationAmount = 1.0F;
+            cohesionAmount = 1.0F;
+            alignmentAmount = 1.0F;
         }
 
         public override Vector2 Calculate()
         {
-            throw new NotImplementedException();
-            /*
-            Vector2D steeringForce = new Vector2D(0, 0);
-            World.Instance.TagNeighbours(MovingEntity, 100);
-            List<MovingEntity> entities = World.Instance.GetMovingEntities();
+            Vector2 steeringForce = new Vector2(0, 0);
 
-            steeringForce.Add(SteeringBehaviours.Cohesion(MovingEntity, entities).Multiply(cohesionAmount));
-            steeringForce.Add(SteeringBehaviours.Alignment(MovingEntity, entities).Multiply(alignmentAmount));
-            steeringForce.Add(SteeringBehaviours.Separation(MovingEntity, entities).Multiply(separationAmount));
+            GameWorld.Instance.TagNeighbours(DynamicEntity, 100);
+            List<DynamicGameEntity> entities = GameWorld.Instance.GetMovingEntities();
+
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Cohesion(DynamicEntity, entities), cohesionAmount);
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
 
             return steeringForce.Truncate(maxSteeringForce);
-            */
         }
     }
 }

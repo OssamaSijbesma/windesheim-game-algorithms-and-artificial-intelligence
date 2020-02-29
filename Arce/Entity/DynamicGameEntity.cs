@@ -22,6 +22,7 @@ namespace Arce.Entity
         public LinkedList<Vector2> Targets { get; set; }
 
         public bool Tag { get; set; }
+        public bool Selected { get; set; }
 
         public DynamicGameEntity(Vector2 pos) : base(pos)
         {

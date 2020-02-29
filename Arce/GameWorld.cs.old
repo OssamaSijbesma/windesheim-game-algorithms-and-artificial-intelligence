@@ -1,0 +1,59 @@
+﻿using Arce.Entity;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Arce
+{
+    class GameWorld
+    {
+        private static GameWorld instance = new GameWorld();
+        private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
+        private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
+
+        private GameWorld() 
+        {
+            dynamicEntities.Add(new DynamicGameEntity(new Vector2(20, 20)));
+        }
+
+        public static GameWorld Instance => instance;
+        internal List<DynamicGameEntity> GetMovingEntities() => dynamicEntities;
+
+        public void TagNeighbours(DynamicGameEntity centralEntity, double radius)
+        {
+            foreach (DynamicGameEntity entity in dynamicEntities)
+            {
+                // Clear current tag.
+                entity.Tag = false;
+
+                // Calculate the difference in space
+                Vector2 difference = Vector2.Subtract(entity.Pos, centralEntity.Pos);
+
+                // When the entity is in range it gets tageed.
+                if (entity != centralEntity && difference.LengthSquared() < radius * radius)
+                    entity.Tag = true;
+            }
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            // Update the dynamic entity
+            dynamicEntities.ForEach(d => d.Update((float)gameTime.ElapsedGameTime.TotalSeconds * 0.8F));
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+
+            // Draw the entities
+            staticEntities.ForEach(s => s.Draw(spriteBatch));
+            dynamicEntities.ForEach(d => d.Draw(spriteBatch));
+
+            spriteBatch.End();
+        }
+    }
+}
