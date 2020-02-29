@@ -32,7 +32,29 @@ namespace Arce.Entity
             Mass = 1.0F;
             MaxSpeed = 150.0F;
             Targets.AddLast(new Vector2(900, 300));
-            SteeringBehaviour = new SeekBehaviour(this);
+            SteeringBehaviour = new FlockingBehaviour(this);
+        }
+
+        public void EnforceNonPenetrationConstraint(List<DynamicGameEntity> dynamicEntities)
+        {
+            foreach (DynamicGameEntity entity in dynamicEntities)
+            {
+                //make sure we don't check against the individual
+                if (entity == this) continue;
+
+                // calculate the distance between the positions of the entities
+                Vector2 ToEntity = Vector2.Subtract(Pos, entity.Pos);
+
+                float distFromEachOther = ToEntity.Length();
+
+                //if this distance is smaller than the sum of their radii then this entity must be moved away in the direction parallel to the ToEntity vector
+                float amountOfOverlap = 5 + 5 - distFromEachOther;
+
+                //move the entity a distance away equivalent to the amount of overlap
+                if (amountOfOverlap >= 0)
+                    Pos += Vector2.Multiply(Vector2.Divide(ToEntity, distFromEachOther), amountOfOverlap);
+            }
+
         }
 
         public override void Update(float timeElapsed)
@@ -51,7 +73,6 @@ namespace Arce.Entity
 
             // Update position.
             Pos += Vector2.Multiply(Velocity, timeElapsed);
-            Console.WriteLine(Pos);
 
             // Update heading if the velocity is bigger than 0
             if (Velocity.LengthSquared() > 0)
