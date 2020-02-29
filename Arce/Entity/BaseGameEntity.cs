@@ -18,7 +18,7 @@ namespace Arce
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawCircle(Pos, 10f, 0, Color.Blue);
+            spriteBatch.DrawCircle(Pos, 5f, 64, Color.Black);
         }
     }
 }

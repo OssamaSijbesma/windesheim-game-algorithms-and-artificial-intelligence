@@ -1,26 +1,24 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Arce.Entity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
+using System.Collections.Generic;
 
 namespace Arce
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
-    public class Game1 : Game
+    public class GameWorld : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // The tile map
         private TiledMap map;
-
-        // The renderer for the map
         private TiledMapRenderer mapRenderer;
+        private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
+        private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
 
-        public Game1()
+        public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
 
@@ -33,16 +31,10 @@ namespace Arce
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             // Load the compiled map
-            map = Content.Load<TiledMap>("WorldMap/structure");
+            map = Content.Load<TiledMap>("TiledMap/structure");
 
             // Make sure the graphicsdevice 
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
@@ -53,13 +45,11 @@ namespace Arce
             // Display the mouse
             this.IsMouseVisible = true;
 
+            dynamicEntities.Add(new DynamicGameEntity(new Vector2(20, 20)));
+
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -68,20 +58,11 @@ namespace Arce
             // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -90,26 +71,46 @@ namespace Arce
             // Update the map
             mapRenderer.Update(map, gameTime);
 
+            // Update the dynamic entity
+            dynamicEntities.ForEach(d => d.Update((float)gameTime.ElapsedGameTime.TotalSeconds * 0.8F));
+
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             // Clear the screen
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
-
-            // map Should be the `TiledMap`
-            // Once again, the transform matrix is only needed if you have a Camera2D
+            // Draw the map
             mapRenderer.Draw(map);
 
+            spriteBatch.Begin();
+            // Draw the entities
+            staticEntities.ForEach(s => s.Draw(spriteBatch));
+            dynamicEntities.ForEach(d => d.Draw(spriteBatch));
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        /*
+        public void TagNeighbours(DynamicGameEntity centralEntity, double radius)
+        {
+            foreach (DynamicGameEntity entity in movingEntities)
+            {
+                // Clear current tag.
+                entity.Tag = false;
+
+                // Calculate the difference in space
+                Vector2 difference = entity.Pos.Clone().Sub(centralEntity.Pos);
+
+                // When the entity is in range it gets tageed.
+                if (entity != centralEntity && difference.LengthSquared() < radius * radius)
+                    entity.Tag = true;
+            }
+        }
+        */
+
     }
 }

@@ -13,7 +13,7 @@ namespace Arce
         [STAThread]
         static void Main()
         {
-            using (Game1 game = new Game1())
+            using (GameWorld game = new GameWorld())
                 game.Run();
         }
     }

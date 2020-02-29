@@ -42,10 +42,16 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Behaviour\ArriveBehaviour.cs" />
+    <Compile Include="Behaviour\FleeBehaviour.cs" />
+    <Compile Include="Behaviour\FlockingBehaviour.cs" />
+    <Compile Include="Behaviour\SeekBehaviour.cs" />
+    <Compile Include="Behaviour\SteeringBehaviour.cs" />
+    <Compile Include="Behaviour\SteeringBehaviours.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
     <Compile Include="Entity\StaticGameEntity.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,6 +127,10 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\Dynamic\" />
+    <Folder Include="Entity\Static\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
