@@ -169,9 +169,9 @@ namespace Arce.NavigationGraph
                 if (vertex.red == true)
                     spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Red, 3F);
                 else if(vertex.scratch != 0)
-                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Yellow, 3F);
+                    spriteBatch.DrawCircle(vertex.coordinate, 2F, 12, Color.Yellow, 3F);
                 else
-                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.ForestGreen, 3F);
+                    spriteBatch.DrawCircle(vertex.coordinate, 2F, 12, Color.ForestGreen, 3F);
 
             spriteBatch.End();
         }
