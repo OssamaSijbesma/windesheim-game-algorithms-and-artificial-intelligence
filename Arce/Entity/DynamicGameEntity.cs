@@ -1,4 +1,4 @@
-﻿using Arce.behaviour;
+﻿using Arce.Behaviour;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using System;

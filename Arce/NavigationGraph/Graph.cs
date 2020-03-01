@@ -89,11 +89,11 @@ namespace Arce.NavigationGraph
             // Register the startpoint of the algorithm
             Vertex start;
             if (!vertexMap.TryGetValue(GetNearestVertex(Start), out start))
-                throw new System.Exception();
+                return new LinkedList<Vertex>();
 
             Vertex target;
             if (!vertexMap.TryGetValue(GetNearestVertex(Target), out target))
-                throw new System.Exception();
+                target = start;
 
             // Create a priority queue
             PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>();

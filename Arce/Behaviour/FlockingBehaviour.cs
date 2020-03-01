@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arce.behaviour
+namespace Arce.Behaviour
 {
     class FlockingBehaviour : SteeringBehaviour
     {
@@ -36,7 +36,6 @@ namespace Arce.behaviour
             steeringForce += Vector2.Multiply(SteeringBehaviours.Cohesion(DynamicEntity, entities), cohesionAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
-            Console.WriteLine(steeringForce);
             return steeringForce.Truncate(maxSteeringForce);
         }
     }

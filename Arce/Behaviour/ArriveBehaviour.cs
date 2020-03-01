@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arce.behaviour
+namespace Arce.Behaviour
 {
     class ArriveBehaviour : SteeringBehaviour
     {

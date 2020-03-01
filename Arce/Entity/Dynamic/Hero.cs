@@ -1,5 +1,4 @@
-﻿using Arce.behaviour;
-using Arce.Behaviour;
+﻿using Arce.Behaviour;
 using Arce.NavigationGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,9 +13,9 @@ namespace Arce.Entity
 {
     class Hero : DynamicGameEntity
     {
+        private Vector2 oldTarget = new Vector2(0, 0);
         private Dictionary<string, Rectangle> animations = new Dictionary<string, Rectangle>();
         private string curAnimation = "up";
-        private Vector2 oldTarget = new Vector2(0, 0);
 
         public Hero(Vector2 pos) : base(pos)
         {
@@ -32,9 +31,27 @@ namespace Arce.Entity
 
         public override void Update(float timeElapsed)
         {
+            // When the target is changed get he path
+            if (oldTarget != GameWorld.Instance.Target)
+            {
+                // Set old path
+                oldTarget = GameWorld.Instance.Target;
+
+                // Clear current targets
+                Targets.Clear();
+
+                // Set the path for the hero
+                foreach (Vertex vertex in GameWorld.Instance.navigationGraph.Dijkstra(Pos, GameWorld.Instance.Target))
+                {
+                    Targets.AddFirst(vertex.coordinate);
+                }
+            }
+
+            // Remove waypoints if the hero gets close
             if (Targets.Count > 1 && Vector2.Subtract(Targets.First(), Pos).Length() < 16)
                 Targets.RemoveFirst();
 
+            // Decide what behaviour is fitting
             switch (Targets.Count)
             {
                 case 9:
@@ -55,17 +72,6 @@ namespace Arce.Entity
                 default:
                     SteeringBehaviour = new SeekBehaviour(this);
                     break;
-            }
-
-
-            if (oldTarget != GameWorld.Instance.Target)
-            {
-                oldTarget = GameWorld.Instance.Target;
-                Targets.Clear();
-                foreach (Vertex vertex in GameWorld.Instance.navigationGraph.Dijkstra(Pos, GameWorld.Instance.Target))
-                {
-                    Targets.AddFirst(vertex.coordinate);
-                }
             }
 
             base.Update(timeElapsed);

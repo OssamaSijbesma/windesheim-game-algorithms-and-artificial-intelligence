@@ -1,4 +1,4 @@
-﻿using Arce.behaviour;
+﻿using Arce.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

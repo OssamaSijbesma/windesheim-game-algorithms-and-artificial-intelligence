@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Arce.Entity;
 using Microsoft.Xna.Framework;
 
-namespace Arce.behaviour
+namespace Arce.Behaviour
 {
     public enum Decelaration { Slow = 3, Normal = 2, Fast = 1 }
 
