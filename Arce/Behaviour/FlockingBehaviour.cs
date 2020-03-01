@@ -20,7 +20,7 @@ namespace Arce.behaviour
         {
             maxSteeringForce = 5.0F;
             separationAmount = 3.0F;
-            cohesionAmount = 1.0F;
+            cohesionAmount = 2.0F;
             alignmentAmount = 1.0F;
         }
 

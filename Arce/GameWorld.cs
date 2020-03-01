@@ -107,6 +107,7 @@ namespace Arce
 
             // Draw the entities
             spriteBatch.Begin();
+            navigationGraph.Draw(spriteBatch);
             staticEntities.ForEach(s => s.Draw(spriteBatch));
             dynamicEntities.ForEach(d => d.Draw(spriteBatch));
             spriteBatch.End();

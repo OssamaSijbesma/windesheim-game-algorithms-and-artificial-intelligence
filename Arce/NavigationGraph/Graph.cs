@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,31 @@ namespace Arce.NavigationGraph
         public Graph(TiledMap map)
         {
             vertexMap = new Dictionary<Vector2, Vertex>();
-            // Construct the map with the flood fill algorithm
 
+            // Construct the vertexes based off the map
+            for (int counter = 0, y = 0; y < map.Height; y++)
+                for (int x = 0; x < map.Width; x++, counter ++)
+                    if(map.TileLayers[0].Tiles[counter].GlobalIdentifier == 8 && map.TileLayers[1].Tiles[counter].GlobalIdentifier == 0)
+                        GetVertex(new Vector2(x * 16 + 8, y * 16 + 8));
+
+            // Generate the edges
+            foreach (Vertex vertex in vertexMap.Values)
+            {
+                Vector2 coordinate = vertex.coordinate;
+                Vector2 r = new Vector2(coordinate.X + 16F, coordinate.Y);
+                Vector2 ru = new Vector2(coordinate.X + 16F, coordinate.Y - 16F);
+                Vector2 rd = new Vector2(coordinate.X + 16F, coordinate.Y + 16F);
+                Vector2 d = new Vector2(coordinate.X, coordinate.Y + 16F);
+
+                if (vertexMap.ContainsKey(r))
+                    AddEdge(coordinate, r, 1);
+                if (vertexMap.ContainsKey(ru))
+                    AddEdge(coordinate, ru, 1);
+                if (vertexMap.ContainsKey(rd))
+                    AddEdge(coordinate, rd, 1);
+                if (vertexMap.ContainsKey(d))
+                    AddEdge(coordinate, d, 1);
+            }
         }
 
         public Vertex GetVertex(Vector2 coordinate)
@@ -42,6 +66,7 @@ namespace Arce.NavigationGraph
             Vertex vertex = GetVertex(source);
             Vertex vertex1 = GetVertex(dest);
             vertex.edges.AddLast(new Edge(vertex1, cost));
+            vertex1.edges.AddLast(new Edge(vertex, cost));
         }
 
         public void ClearAll()
@@ -53,6 +78,15 @@ namespace Arce.NavigationGraph
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            foreach (Vertex vertex in vertexMap.Values)
+            {
+                // Draw vertex
+                spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.LightGray, 3F);
+
+                // Draw the edges of the vertex
+                foreach (Edge edge in vertex.edges)
+                    spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.LightGray);
+            }
 
         }
     }
