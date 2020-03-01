@@ -50,6 +50,7 @@
     <Compile Include="Behaviour\SteeringBehaviours.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
+    <Compile Include="Entity\Dynamic\Chicken.cs" />
     <Compile Include="Entity\StaticGameEntity.cs" />
     <Compile Include="FiniteStateMachine\State.cs" />
     <Compile Include="FiniteStateMachine\StateMachine.cs" />
@@ -136,7 +137,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\Dynamic\" />
     <Folder Include="Entity\Static\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
