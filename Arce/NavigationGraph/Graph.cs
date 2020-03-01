@@ -44,7 +44,6 @@ namespace Arce.NavigationGraph
                     AddEdge(coordinate, d, 1);
             }
 
-            Dijkstra(new Vector2(136, 136), new Vector2(136, 280));
         }
 
         public Vertex GetVertex(Vector2 coordinate)
@@ -62,6 +61,8 @@ namespace Arce.NavigationGraph
             }
         }
 
+        public Vector2 GetNearestVertex(Vector2 position) => new Vector2(((int)position.X) / 16 * 16 + 8, ((int)position.Y) / 16 * 16 + 8);
+
         public void AddEdge(Vector2 source, Vector2 dest, double cost)
         {
             // Add a new edge to the graph
@@ -78,6 +79,8 @@ namespace Arce.NavigationGraph
                 vertex.Reset();
         }
 
+        
+
         // Dijkstra algorithm
         public LinkedList<Vertex> Dijkstra(Vector2 Start, Vector2 Target)
         {
@@ -85,7 +88,11 @@ namespace Arce.NavigationGraph
 
             // Register the startpoint of the algorithm
             Vertex start;
-            if (!vertexMap.TryGetValue(Start, out start))
+            if (!vertexMap.TryGetValue(GetNearestVertex(Start), out start))
+                throw new System.Exception();
+
+            Vertex target;
+            if (!vertexMap.TryGetValue(GetNearestVertex(Target), out target))
                 throw new System.Exception();
 
             // Create a priority queue
@@ -110,7 +117,7 @@ namespace Arce.NavigationGraph
                 vertex.scratch = 1;
                 nodesSeen++;
 
-                if (vertex.coordinate == Target)
+                if (vertex.coordinate == target.coordinate)
                 {
                     LinkedList<Vertex> vertices = new LinkedList<Vertex>();
                     Vertex verti = vertex;

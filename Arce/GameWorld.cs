@@ -18,13 +18,18 @@ namespace Arce
         private static GameWorld instance = new GameWorld();
 
         private TiledMap map;
-        private Graph navigationGraph;
+        public Graph navigationGraph;
         private TiledMapRenderer mapRenderer;
         private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
         private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
 
-        private KeyboardState previousState;
+        private MouseState mouseState = Mouse.GetState();
+        private KeyboardState previousState =  Keyboard.GetState();
+
         private bool showGraph = false;
+
+        public Vector2 Target = new Vector2(200, 200);
+        public Texture2D chickenTexture;
 
         private GameWorld()
         {
@@ -60,15 +65,16 @@ namespace Arce
             // Display the mouse
             this.IsMouseVisible = true;
 
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(230, 200)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(201, 180)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(222, 160)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(213, 210)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(204, 200)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(205, 201)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(205, 202)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(205, 240)));
-            dynamicEntities.Add(new DynamicGameEntity(new Vector2(205, 207)));
+            dynamicEntities.Add(new Hero(new Vector2(20, 20)));
+            dynamicEntities.Add(new Duck(new Vector2(230, 200)));
+            dynamicEntities.Add(new Duck(new Vector2(201, 180)));
+            dynamicEntities.Add(new Duck(new Vector2(222, 160)));
+            dynamicEntities.Add(new Duck(new Vector2(213, 210)));
+            dynamicEntities.Add(new Duck(new Vector2(204, 200)));
+            dynamicEntities.Add(new Duck(new Vector2(205, 201)));
+            dynamicEntities.Add(new Duck(new Vector2(205, 202)));
+            dynamicEntities.Add(new Duck(new Vector2(205, 240)));
+            dynamicEntities.Add(new Duck(new Vector2(205, 207)));
 
             base.Initialize();
         }
@@ -77,6 +83,9 @@ namespace Arce
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Load textures
+            chickenTexture = Content.Load<Texture2D>("chicken");
         }
 
         protected override void UnloadContent()
@@ -93,6 +102,11 @@ namespace Arce
             // Show graph when G pressed
             if (Keyboard.GetState().IsKeyDown(Keys.G) && !previousState.IsKeyDown(Keys.G))
                 showGraph = !showGraph;
+
+            // Set target
+            mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed)
+                Target = new Vector2(mouseState.X, mouseState.Y);
 
             // Update the map
             mapRenderer.Update(map, gameTime);

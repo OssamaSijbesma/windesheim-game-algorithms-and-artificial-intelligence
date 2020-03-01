@@ -50,7 +50,8 @@
     <Compile Include="Behaviour\SteeringBehaviours.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
-    <Compile Include="Entity\Dynamic\Chicken.cs" />
+    <Compile Include="Entity\Dynamic\Duck.cs" />
+    <Compile Include="Entity\Dynamic\Hero.cs" />
     <Compile Include="Entity\StaticGameEntity.cs" />
     <Compile Include="FiniteStateMachine\State.cs" />
     <Compile Include="FiniteStateMachine\StateMachine.cs" />

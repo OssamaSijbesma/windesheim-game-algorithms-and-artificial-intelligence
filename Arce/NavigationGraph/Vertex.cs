@@ -29,6 +29,7 @@ namespace Arce.NavigationGraph
             dist = Graph.INFINITY;
             prev = null;
             scratch = 0;
+            red = false;
         }
     }
 }

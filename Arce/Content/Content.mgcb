@@ -14,6 +14,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin chicken.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:chicken.png
+
 #begin TiledMap/spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -30,21 +42,4 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:TiledMap/structure.tmx
-
-#begin WorldMap/spritesheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:WorldMap/spritesheet.png
-
-#begin WorldMap/structure.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:WorldMap/structure.tmx
 

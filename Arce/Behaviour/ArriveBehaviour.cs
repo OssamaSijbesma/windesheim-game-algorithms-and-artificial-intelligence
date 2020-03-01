@@ -10,10 +10,13 @@ namespace Arce.behaviour
 {
     class ArriveBehaviour : SteeringBehaviour
     {
-        public ArriveBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
+        private Decelaration decelaration;
+
+        public ArriveBehaviour(DynamicGameEntity dynamicEntity, Decelaration decelaration) : base(dynamicEntity)
         {
+            this.decelaration = decelaration;
         }
 
-        public override Vector2 Calculate() => SteeringBehaviours.Arrive(DynamicEntity, DynamicEntity.Targets.First(), Decelaration.Fast);
+        public override Vector2 Calculate() => SteeringBehaviours.Arrive(DynamicEntity, DynamicEntity.Targets.First(), decelaration);
     }
 }
