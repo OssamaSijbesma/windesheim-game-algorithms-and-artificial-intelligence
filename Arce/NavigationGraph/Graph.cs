@@ -154,25 +154,24 @@ namespace Arce.NavigationGraph
         {
             spriteBatch.Begin();
 
+            // Draw the edges of the vertex
             foreach (Vertex vertex in vertexMap.Values)
-            {
-                // Draw vertex
-                spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.LightGray, 3F);
-
-                if (vertex.red == true)
-                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Red, 3F);
-
-                // Draw the edges of the vertex
                 foreach (Edge edge in vertex.edges)
-                {
                     if (vertex.red == true && edge.Dest.red == true)
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Red);
-                    else if(edge.Dest.scratch != 0)
+                    else if (edge.Dest.scratch != 0)
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Yellow);
                     else
-                        spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.LightGray);
-                }
-            }
+                        spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.ForestGreen);
+
+            // Draw vertex
+            foreach (Vertex vertex in vertexMap.Values)
+                if (vertex.red == true)
+                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Red, 3F);
+                else if(vertex.scratch != 0)
+                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Yellow, 3F);
+                else
+                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.ForestGreen, 3F);
 
             spriteBatch.End();
         }
