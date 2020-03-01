@@ -1,4 +1,5 @@
 ﻿using Arce.Entity;
+using Arce.NavigationGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,7 @@ namespace Arce
         private static GameWorld instance = new GameWorld();
 
         private TiledMap map;
+        private Graph navigationGraph;
         private TiledMapRenderer mapRenderer;
         private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
         private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
@@ -42,6 +44,9 @@ namespace Arce
         {
             // Load the compiled map
             map = Content.Load<TiledMap>("TiledMap/structure");
+
+            // Generate the graph with the map
+            navigationGraph = new Graph(map);
 
             // Make sure the graphicsdevice 
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
