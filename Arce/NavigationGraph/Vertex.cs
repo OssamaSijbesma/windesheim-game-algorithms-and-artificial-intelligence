@@ -14,6 +14,7 @@ namespace Arce.NavigationGraph
         public double dist;             // Cost to get to this vertex with the last used algorithm
         public Vertex prev;             // Previous vertex on shortest path algorithm
         public int scratch;             // Extra variable used in algorithms
+        public bool red;
 
         public Vertex(Vector2 coordinate)
         {

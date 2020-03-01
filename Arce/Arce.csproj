@@ -57,6 +57,7 @@
     <None Include="GameWorld.cs.old" />
     <Compile Include="NavigationGraph\Edge.cs" />
     <Compile Include="NavigationGraph\Graph.cs" />
+    <Compile Include="NavigationGraph\PriorityQueue.cs" />
     <Compile Include="NavigationGraph\Vertex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

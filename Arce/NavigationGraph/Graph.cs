@@ -37,12 +37,14 @@ namespace Arce.NavigationGraph
                 if (vertexMap.ContainsKey(r))
                     AddEdge(coordinate, r, 1);
                 if (vertexMap.ContainsKey(ru))
-                    AddEdge(coordinate, ru, 1);
+                    AddEdge(coordinate, ru, 2);
                 if (vertexMap.ContainsKey(rd))
-                    AddEdge(coordinate, rd, 1);
+                    AddEdge(coordinate, rd, 2);
                 if (vertexMap.ContainsKey(d))
                     AddEdge(coordinate, d, 1);
             }
+
+            Dijkstra(new Vector2(136, 136), new Vector2(136, 280));
         }
 
         public Vertex GetVertex(Vector2 coordinate)
@@ -76,18 +78,103 @@ namespace Arce.NavigationGraph
                 vertex.Reset();
         }
 
+        // Dijkstra algorithm
+        public LinkedList<Vertex> Dijkstra(Vector2 Start, Vector2 Target)
+        {
+            ClearAll();
+
+            // Register the startpoint of the algorithm
+            Vertex start;
+            if (!vertexMap.TryGetValue(Start, out start))
+                throw new System.Exception();
+
+            // Create a priority queue
+            PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>();
+            priorityQueue.Add(new Edge(start, 0));
+            start.dist = 0;
+
+            // Amount of nodes seen
+            int nodesSeen = 0;
+
+            // Continue while the priority queue still has items and if not all vertexes are seen.
+            while (priorityQueue.Size() > 0 && nodesSeen < vertexMap.Count)
+            {
+                // Get the vertex with the shortest path
+                Edge path = priorityQueue.Remove();
+                Vertex vertex = path.Dest;
+
+                if (vertex.scratch != 0)
+                    continue;
+
+                // Scratch vertex
+                vertex.scratch = 1;
+                nodesSeen++;
+
+                if (vertex.coordinate == Target)
+                {
+                    LinkedList<Vertex> vertices = new LinkedList<Vertex>();
+                    Vertex verti = vertex;
+                    vertices.AddLast(verti);
+                    while (verti.prev != null)
+                    {
+                        verti.red = true;
+                        vertices.AddLast(verti.prev);
+                        verti = verti.prev;
+                    }
+
+                    return vertices;
+                }
+
+                // Foreach all edges en set the distance of those nodes
+                foreach (Edge edge in vertex.edges)
+                {
+                    Vertex destVertex = edge.Dest;
+                    double edgeCost = edge.Cost;
+
+
+
+                    if (edgeCost < 0)
+                        throw new System.Exception();
+
+                    // Check if the distance is shorter
+                    if (destVertex.dist > vertex.dist + edgeCost)
+                    {
+                        // Set the distance and the vertex where it came from
+                        destVertex.dist = vertex.dist + edgeCost;
+                        destVertex.prev = vertex;
+                        // Add vertex to the priority queue
+                        priorityQueue.Add(new Edge(destVertex, destVertex.dist));
+                    }
+                }
+            }
+            return default;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+
             foreach (Vertex vertex in vertexMap.Values)
             {
                 // Draw vertex
                 spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.LightGray, 3F);
 
+                if (vertex.red == true)
+                    spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Red, 3F);
+
                 // Draw the edges of the vertex
                 foreach (Edge edge in vertex.edges)
-                    spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.LightGray);
+                {
+                    if (vertex.red == true && edge.Dest.red == true)
+                        spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Red);
+                    else if(edge.Dest.scratch != 0)
+                        spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Yellow);
+                    else
+                        spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.LightGray);
+                }
             }
 
+            spriteBatch.End();
         }
     }
 }

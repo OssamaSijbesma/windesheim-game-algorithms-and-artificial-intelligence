@@ -23,6 +23,9 @@ namespace Arce
         private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
         private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
 
+        private KeyboardState previousState;
+        private bool showGraph = false;
+
         private GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -74,8 +77,6 @@ namespace Arce
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void UnloadContent()
@@ -85,14 +86,22 @@ namespace Arce
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            // Exit game when Escape pressed
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            // Show graph when G pressed
+            if (Keyboard.GetState().IsKeyDown(Keys.G) && !previousState.IsKeyDown(Keys.G))
+                showGraph = !showGraph;
 
             // Update the map
             mapRenderer.Update(map, gameTime);
 
             // Update the dynamic entity
             dynamicEntities.ForEach(d => d.Update((float)gameTime.ElapsedGameTime.TotalSeconds * 0.8F));
+
+            // Record previous state
+            previousState = Keyboard.GetState();
 
             base.Update(gameTime);
         }
@@ -105,9 +114,11 @@ namespace Arce
             // Draw the map
             mapRenderer.Draw(map);
 
+            // Draw NavGraph when 
+            if (showGraph) navigationGraph.Draw(spriteBatch);
+
             // Draw the entities
             spriteBatch.Begin();
-            navigationGraph.Draw(spriteBatch);
             staticEntities.ForEach(s => s.Draw(spriteBatch));
             dynamicEntities.ForEach(d => d.Draw(spriteBatch));
             spriteBatch.End();
