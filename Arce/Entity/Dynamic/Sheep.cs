@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace Arce.Entity
 {
-    class Duck : DynamicGameEntity
+    class Sheep : DynamicGameEntity
     {
         private Dictionary<string, Rectangle> animations = new Dictionary<string, Rectangle>();
         private string curAnimation = "up";
 
-        public Duck(Vector2 pos) : base(pos)
+        public Sheep(Vector2 pos) : base(pos)
         {
             Mass = 1.0F;
             MaxSpeed = 20.0F;
             SteeringBehaviour = new FlockingBehaviour(this);
 
-            animations.Add("up", new Rectangle(0, 0, 16, 16));
-            animations.Add("down", new Rectangle(16, 0, 16, 16));
-            animations.Add("left", new Rectangle(32, 0, 16, 16));
-            animations.Add("right", new Rectangle(48, 0, 16, 16));
+            animations.Add("up", new Rectangle(0, 64, 32, 32));
+            animations.Add("down", new Rectangle(0, 0, 32, 32));
+            animations.Add("left", new Rectangle(0, 32, 32, 32));
+            animations.Add("right", new Rectangle(0, 32, 32, 32));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -37,7 +37,7 @@ namespace Arce.Entity
             else if (Heading.Y < -0.5)
                 curAnimation = "up";
 
-            spriteBatch.Draw(GameWorld.Instance.chickenTexture, Pos, animations[curAnimation], Color.White);
+            spriteBatch.Draw(GameWorld.Instance.sheepTexture, Pos, animations[curAnimation], Color.White);
         }
     }
 }
