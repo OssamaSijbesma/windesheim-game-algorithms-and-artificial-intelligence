@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arce.FiniteStateMachine
+namespace Arce.Brain
 {
-    class StateMachine<T>
+    interface ThinkGoal : Goal
     {
     }
 }
