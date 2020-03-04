@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    abstract class CompositeGoal : Goal
+    abstract class CompositeGoal : IGoal
     {
 
         public abstract void Activate();
@@ -15,7 +15,7 @@ namespace Arce.Brain
 
         public abstract void Terminate();
 
-        public virtual void AddSubgoal(Goal goal) 
+        public virtual void AddSubgoal(IGoal goal) 
         {
         
         }

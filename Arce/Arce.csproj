@@ -60,7 +60,7 @@
     <Compile Include="Brain\AtomicGoal\TraverseVertexGoal.cs" />
     <Compile Include="Brain\CompositeGoal\FollowTargetGoal.cs" />
     <Compile Include="Brain\CompositeGoal\ThinkGoal.cs" />
-    <Compile Include="Brain\Goal.cs" />
+    <Compile Include="Brain\IGoal.cs" />
     <Compile Include="NavigationGraph\Edge.cs" />
     <Compile Include="NavigationGraph\Graph.cs" />
     <Compile Include="NavigationGraph\PriorityQueue.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    class TraverseVertexGoal : Goal
+    class TraverseVertexGoal : IGoal
     {
         public void Activate()
         {

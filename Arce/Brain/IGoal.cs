@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    interface Goal
+    interface IGoal
     {
         void Activate();
         int Process();
