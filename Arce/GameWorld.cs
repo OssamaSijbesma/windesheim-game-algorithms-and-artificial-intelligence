@@ -30,6 +30,7 @@ namespace Arce
 
         public Vector2 Target = new Vector2(200, 200);
         public Texture2D chickenTexture;
+        public Texture2D sheepTexture;
 
         private GameWorld()
         {
@@ -66,15 +67,15 @@ namespace Arce
             this.IsMouseVisible = true;
 
             dynamicEntities.Add(new Hero(new Vector2(20, 20)));
-            dynamicEntities.Add(new Duck(new Vector2(230, 200)));
-            dynamicEntities.Add(new Duck(new Vector2(201, 180)));
-            dynamicEntities.Add(new Duck(new Vector2(222, 160)));
-            dynamicEntities.Add(new Duck(new Vector2(213, 210)));
-            dynamicEntities.Add(new Duck(new Vector2(204, 200)));
-            dynamicEntities.Add(new Duck(new Vector2(205, 201)));
-            dynamicEntities.Add(new Duck(new Vector2(205, 202)));
-            dynamicEntities.Add(new Duck(new Vector2(205, 240)));
-            dynamicEntities.Add(new Duck(new Vector2(205, 207)));
+            dynamicEntities.Add(new Sheep(new Vector2(230, 200)));
+            dynamicEntities.Add(new Sheep(new Vector2(201, 180)));
+            dynamicEntities.Add(new Sheep(new Vector2(222, 160)));
+            dynamicEntities.Add(new Sheep(new Vector2(213, 210)));
+            dynamicEntities.Add(new Sheep(new Vector2(204, 200)));
+            dynamicEntities.Add(new Sheep(new Vector2(205, 201)));
+            dynamicEntities.Add(new Sheep(new Vector2(205, 202)));
+            dynamicEntities.Add(new Sheep(new Vector2(205, 240)));
+            dynamicEntities.Add(new Sheep(new Vector2(205, 207)));
 
             base.Initialize();
         }
@@ -86,6 +87,7 @@ namespace Arce
 
             // Load textures
             chickenTexture = Content.Load<Texture2D>("chicken");
+            sheepTexture = Content.Load<Texture2D>("sheep");
         }
 
         protected override void UnloadContent()
