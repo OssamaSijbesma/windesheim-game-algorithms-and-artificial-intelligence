@@ -136,9 +136,11 @@ namespace Arce.NavigationGraph
                 foreach (Edge edge in vertex.edges)
                 {
                     Vertex destVertex = edge.Dest;
-                    double edgeCost = edge.Cost;
 
+                    // Guess cost of traversing to target
+                    float hCost = (Math.Abs(target.coordinate.X - destVertex.coordinate.X) + Math.Abs(target.coordinate.Y - destVertex.coordinate.Y)) / 16;
 
+                    double edgeCost = edge.Cost + hCost;
 
                     if (edgeCost < 0)
                         throw new System.Exception();
@@ -149,6 +151,7 @@ namespace Arce.NavigationGraph
                         // Set the distance and the vertex where it came from
                         destVertex.dist = vertex.dist + edgeCost;
                         destVertex.prev = vertex;
+
                         // Add vertex to the priority queue
                         priorityQueue.Add(new Edge(destVertex, destVertex.dist));
                     }
