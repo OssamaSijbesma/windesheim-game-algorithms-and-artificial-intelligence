@@ -48,6 +48,7 @@
     <Compile Include="Behaviour\SeekBehaviour.cs" />
     <Compile Include="Behaviour\SteeringBehaviour.cs" />
     <Compile Include="Behaviour\SteeringBehaviours.cs" />
+    <Compile Include="Brain\CompositeGoal.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
     <Compile Include="Entity\Dynamic\Sheep.cs" />

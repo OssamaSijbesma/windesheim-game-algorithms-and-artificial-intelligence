@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    interface SeekGoal : Goal
+    class SeekGoal : Goal
     {
+        public void Activate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Process()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Terminate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

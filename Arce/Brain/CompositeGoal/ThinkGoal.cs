@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    interface ThinkGoal : Goal
+    class ThinkGoal : CompositeGoal
     {
+        public override void Activate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int Process()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Terminate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

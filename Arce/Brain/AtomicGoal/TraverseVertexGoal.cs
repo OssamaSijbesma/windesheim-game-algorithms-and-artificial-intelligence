@@ -8,5 +8,19 @@ namespace Arce.Brain
 {
     class TraverseVertexGoal : Goal
     {
+        public void Activate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Process()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Terminate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

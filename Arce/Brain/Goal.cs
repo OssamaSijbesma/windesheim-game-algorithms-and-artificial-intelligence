@@ -11,6 +11,5 @@ namespace Arce.Brain
         void Activate();
         int Process();
         void Terminate();
-        void AddSubgoal(Goal goal);
     }
 }
