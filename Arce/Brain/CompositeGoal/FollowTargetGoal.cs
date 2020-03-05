@@ -38,19 +38,21 @@ namespace Arce.Brain
                 // Get new path
                 LinkedList<Vertex> newPath = GameWorld.Instance.navigationGraph.Dijkstra(DynamicEntity.Pos, GameWorld.Instance.Target);
 
-                // Clear current targets
+                // Clear current subgoals and path
+                Subgoals.Clear();
                 Path.Clear();
 
-                // Set the path for the entity
+                // Convert the Vertex into Vector2
                 foreach (Vertex vertex in newPath)
                     Path.AddFirst(vertex.coordinate);
             }
 
-            // Remove waypoints if the hero gets close
-            if (Path.Count > 1 && Vector2.Subtract(Path.First(), DynamicEntity.Pos).Length() < 16)
+            if (Path.Count != 0)
+            {
+                AddSubgoal(new TraverseVertexGoal(DynamicEntity, Path.First(), Path.Count));
                 Path.RemoveFirst();
+            }
 
-            AddSubgoal(new TraverseVertexGoal(DynamicEntity, Path.First()));
 
             Subgoals.ForEach(g => g.Process());
 
@@ -60,6 +62,7 @@ namespace Arce.Brain
         public override void Terminate()
         {
             GoalStatus = GoalStatus.Completed;
+            
         }
     }
 }

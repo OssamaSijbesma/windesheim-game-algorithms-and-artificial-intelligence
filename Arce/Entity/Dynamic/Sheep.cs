@@ -20,10 +20,10 @@ namespace Arce.Entity
             MaxSpeed = 20.0F;
             SteeringBehaviour = new FlockingBehaviour(this);
 
-            animations.Add("front", new Rectangle(0, 0, 32, 32));
-            animations.Add("back", new Rectangle(32, 0, 32, 32));
-            animations.Add("left", new Rectangle(0, 32, 32, 32));
-            animations.Add("right", new Rectangle(32, 32, 32, 32));
+            animations.Add("front", new Rectangle(1,1, 32, 32));
+            animations.Add("back", new Rectangle(34, 1, 32, 32));
+            animations.Add("left", new Rectangle(1, 34, 32, 32));
+            animations.Add("right", new Rectangle(34, 34, 32, 32));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

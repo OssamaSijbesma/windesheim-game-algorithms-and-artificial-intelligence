@@ -31,6 +31,7 @@ namespace Arce
         public Vector2 Target = new Vector2(200, 200);
         public Texture2D chickenTexture;
         public Texture2D sheepTexture;
+        public Texture2D mageTexture;
 
         private GameWorld()
         {

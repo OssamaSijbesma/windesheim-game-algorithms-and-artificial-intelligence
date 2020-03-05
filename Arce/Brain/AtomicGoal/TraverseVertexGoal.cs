@@ -15,12 +15,14 @@ namespace Arce.Brain
 
         private DynamicGameEntity dynamicGameEntity;
         private Vector2 target;
+        private int vertexCount;
 
 
-        public TraverseVertexGoal(DynamicGameEntity dynamicGameEntity, Vector2 target)
+        public TraverseVertexGoal(DynamicGameEntity dynamicGameEntity, Vector2 target, int vertexCount)
         {
             this.dynamicGameEntity = dynamicGameEntity;
             this.target = target;
+            this.vertexCount = vertexCount;
         }
 
         public void Activate()
@@ -30,32 +32,32 @@ namespace Arce.Brain
 
         public GoalStatus Process()
         {
-            Activate();
+            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
+            if (GoalStatus == GoalStatus.Inactive) Activate();
 
-            dynamicGameEntity.SteeringBehaviour = new SeekBehaviour(dynamicGameEntity, target);
-            /*
+
+            // Remove waypoints if the hero gets close
+            if (Vector2.Subtract(target, dynamicGameEntity.Pos).Length() < 16)
+                GoalStatus = GoalStatus.Completed;
+
+
+
             // Decide what behaviour is fitting
-            switch (Targets.Count)
+            switch (vertexCount)
             {
-                case 9:
-                case 8:
-                case 7:
-                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, Decelaration.Fast);
+                case 10: case 9: case 8: case 7:
+                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, target, Decelaration.Fast);
                     break;
-                case 6:
-                case 5:
-                case 4:
-                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, Decelaration.Normal);
+                case 6: case 5: case 4:
+                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, target, Decelaration.Normal);
                     break;
-                case 3:
-                case 2:
-                case 1:
-                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, Decelaration.Slow);
+                case 3: case 2: case 1:
+                    dynamicGameEntity.SteeringBehaviour = new ArriveBehaviour(dynamicGameEntity, target, Decelaration.Slow);
                     break;
                 default:
+                    dynamicGameEntity.SteeringBehaviour = new SeekBehaviour(dynamicGameEntity, target);
                     break;
             }
-            */
 
             return GoalStatus;
         }
