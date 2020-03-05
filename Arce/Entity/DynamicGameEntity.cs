@@ -1,4 +1,5 @@
 ﻿using Arce.Behaviour;
+using Arce.Brain;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using System;
@@ -18,6 +19,7 @@ namespace Arce.Entity
         public float Mass { get; set; }
         public float MaxSpeed { get; set; }
         public SteeringBehaviour SteeringBehaviour { get; set; }
+        public IGoal Brain { get; set; }
 
         public LinkedList<Vector2> Targets { get; set; }
 
@@ -33,6 +35,7 @@ namespace Arce.Entity
             MaxSpeed = 150.0F;
             Targets.AddLast(new Vector2(900, 300));
             SteeringBehaviour = new FlockingBehaviour(this);
+            Brain = new ThinkGoal(this);
         }
 
         public void EnforceNonPenetrationConstraint(List<DynamicGameEntity> dynamicEntities)
@@ -48,7 +51,7 @@ namespace Arce.Entity
                 float distFromEachOther = ToEntity.Length();
 
                 //if this distance is smaller than the sum of their radii then this entity must be moved away in the direction parallel to the ToEntity vector
-                float amountOfOverlap = 5 + 5 - distFromEachOther;
+                float amountOfOverlap = 10 + 10 - distFromEachOther;
 
                 //move the entity a distance away equivalent to the amount of overlap
                 if (amountOfOverlap >= 0)
