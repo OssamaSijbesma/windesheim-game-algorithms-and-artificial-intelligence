@@ -21,8 +21,8 @@ namespace Arce.NavigationGraph
 
             // Construct the vertexes based off the map
             for (int counter = 0, y = 0; y < map.Height; y++)
-                for (int x = 0; x < map.Width; x++, counter ++)
-                    if(map.TileLayers[0].Tiles[counter].GlobalIdentifier == 8 && map.TileLayers[1].Tiles[counter].GlobalIdentifier == 0)
+                for (int x = 0; x < map.Width; x++, counter++)
+                    if (map.TileLayers[0].Tiles[counter].GlobalIdentifier == 8 && map.TileLayers[1].Tiles[counter].GlobalIdentifier == 0)
                         GetVertex(new Vector2(x * 16 + 8, y * 16 + 8));
 
             // Generate the edges
@@ -68,8 +68,8 @@ namespace Arce.NavigationGraph
             // Add a new edge to the graph
             Vertex vertex = GetVertex(source);
             Vertex vertex1 = GetVertex(dest);
-            vertex.edges.AddLast(new Edge(vertex1, cost));
-            vertex1.edges.AddLast(new Edge(vertex, cost));
+            vertex.edges.AddLast(new Edge(vertex1, cost, 0));
+            vertex1.edges.AddLast(new Edge(vertex, cost, 0));
         }
 
         public void ClearAll()
@@ -78,7 +78,6 @@ namespace Arce.NavigationGraph
             foreach (Vertex vertex in vertexMap.Values)
                 vertex.Reset();
         }
-
         
 
         // Dijkstra algorithm
@@ -91,23 +90,26 @@ namespace Arce.NavigationGraph
             if (!vertexMap.TryGetValue(GetNearestVertex(Start), out start))
                 return new LinkedList<Vertex>();
 
+            // Register the endpoinnt of the algorithm
             Vertex target;
             if (!vertexMap.TryGetValue(GetNearestVertex(Target), out target))
                 target = start;
 
             // Create a priority queue
-            PriorityQueue<Edge> priorityQueue = new PriorityQueue<Edge>();
-            priorityQueue.Add(new Edge(start, 0));
+            PriorityQueue<Edge> openSet = new PriorityQueue<Edge>();
+            openSet.Add(new Edge(start, 0, 0));
             start.dist = 0;
 
             // Amount of nodes seen
             int nodesSeen = 0;
 
             // Continue while the priority queue still has items and if not all vertexes are seen.
-            while (priorityQueue.Size() > 0 && nodesSeen < vertexMap.Count)
+            while (openSet.Size() > 0 && nodesSeen < vertexMap.Count)
             {
-                // Get the vertex with the shortest path
-                Edge path = priorityQueue.Remove();
+                // Get the edge with lowest cost
+                Edge path = openSet.Remove();
+
+                // Get vertex with shortest path
                 Vertex vertex = path.Dest;
 
                 if (vertex.scratch != 0)
@@ -117,6 +119,7 @@ namespace Arce.NavigationGraph
                 vertex.scratch = 1;
                 nodesSeen++;
 
+                // Check if vertex is the target
                 if (vertex.coordinate == target.coordinate)
                 {
                     LinkedList<Vertex> vertices = new LinkedList<Vertex>();
@@ -128,7 +131,6 @@ namespace Arce.NavigationGraph
                         vertices.AddLast(verti.prev);
                         verti = verti.prev;
                     }
-
                     return vertices;
                 }
 
@@ -136,24 +138,21 @@ namespace Arce.NavigationGraph
                 foreach (Edge edge in vertex.edges)
                 {
                     Vertex destVertex = edge.Dest;
+                    double edgeCost = vertex.dist + edge.GCost;
 
-                    // Guess cost of traversing to target
-                    float hCost = (Math.Abs(target.coordinate.X - destVertex.coordinate.X) + Math.Abs(target.coordinate.Y - destVertex.coordinate.Y)) / 16;
-
-                    double edgeCost = edge.Cost + hCost;
-
-                    if (edgeCost < 0)
-                        throw new System.Exception();
-
-                    // Check if the distance is shorter
-                    if (destVertex.dist > vertex.dist + edgeCost)
+                    if (destVertex.dist > edgeCost)
                     {
+                        // Guess cost of traversing to target with the Manhattan Distance
+                        double hX = Math.Abs(target.coordinate.X - destVertex.coordinate.X) / 16;
+                        double hY = Math.Abs(target.coordinate.Y - destVertex.coordinate.Y) / 16;
+                        double edgeHCost = hX + hY;
+
                         // Set the distance and the vertex where it came from
-                        destVertex.dist = vertex.dist + edgeCost;
+                        destVertex.dist = edgeCost;
                         destVertex.prev = vertex;
 
                         // Add vertex to the priority queue
-                        priorityQueue.Add(new Edge(destVertex, destVertex.dist));
+                        openSet.Add(new Edge(destVertex, destVertex.dist, edgeHCost));
                     }
                 }
             }
@@ -173,12 +172,12 @@ namespace Arce.NavigationGraph
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Yellow);
                     else
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.ForestGreen);
-
+                
             // Draw vertex
             foreach (Vertex vertex in vertexMap.Values)
                 if (vertex.red == true)
                     spriteBatch.DrawCircle(vertex.coordinate, 3F, 12, Color.Red, 3F);
-                else if(vertex.scratch != 0)
+                else if (vertex.scratch != 0)
                     spriteBatch.DrawCircle(vertex.coordinate, 2F, 12, Color.Yellow, 3F);
                 else
                     spriteBatch.DrawCircle(vertex.coordinate, 2F, 12, Color.ForestGreen, 3F);
