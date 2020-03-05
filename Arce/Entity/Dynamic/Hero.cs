@@ -1,4 +1,5 @@
 ﻿using Arce.Behaviour;
+using Arce.Brain;
 using Arce.NavigationGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,7 +22,8 @@ namespace Arce.Entity
         {
             Mass = 1.0F;
             MaxSpeed = 80.0F;
-            SteeringBehaviour = new SeekBehaviour(this);
+            SteeringBehaviour = new SeekBehaviour(this, pos);
+            Brain = new FollowTargetGoal(this);
 
             animations.Add("front", new Rectangle(0, 0, 16, 16));
             animations.Add("back", new Rectangle(16, 0, 16, 16));
@@ -31,49 +33,7 @@ namespace Arce.Entity
 
         public override void Update(float timeElapsed)
         {
-            // When the target is changed get he path
-            if (oldTarget != GameWorld.Instance.Target)
-            {
-                // Set old path
-                oldTarget = GameWorld.Instance.Target;
-
-                // Clear current targets
-                Targets.Clear();
-
-                // Set the path for the hero
-                foreach (Vertex vertex in GameWorld.Instance.navigationGraph.Dijkstra(Pos, GameWorld.Instance.Target))
-                {
-                    Targets.AddFirst(vertex.coordinate);
-                }
-            }
-
-            // Remove waypoints if the hero gets close
-            if (Targets.Count > 1 && Vector2.Subtract(Targets.First(), Pos).Length() < 16)
-                Targets.RemoveFirst();
-
-            // Decide what behaviour is fitting
-            switch (Targets.Count)
-            {
-                case 9:
-                case 8:
-                case 7:
-                    SteeringBehaviour = new ArriveBehaviour(this, Decelaration.Fast);
-                    break;
-                case 6:
-                case 5:
-                case 4:
-                    SteeringBehaviour = new ArriveBehaviour(this, Decelaration.Normal);
-                    break;
-                case 3:
-                case 2:
-                case 1:
-                    SteeringBehaviour = new ArriveBehaviour(this, Decelaration.Slow);
-                    break;
-                default:
-                    SteeringBehaviour = new SeekBehaviour(this);
-                    break;
-            }
-
+            Brain.Process();
             base.Update(timeElapsed);
         }
 

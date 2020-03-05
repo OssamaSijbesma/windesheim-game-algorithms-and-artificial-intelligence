@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arce.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace Arce.Brain
 {
     class ThinkGoal : CompositeGoal
     {
+        public ThinkGoal(DynamicGameEntity dynamicGameEntity) : base(dynamicGameEntity)
+        { }
+
         public override void Activate()
         {
             throw new NotImplementedException();
         }
 
-        public override int Process()
+        public override GoalStatus Process()
         {
             throw new NotImplementedException();
         }

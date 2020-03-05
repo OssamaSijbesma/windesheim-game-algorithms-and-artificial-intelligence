@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
+    enum GoalStatus { Inactive, Active, Completed, Failed }
+
     interface IGoal
     {
+        GoalStatus GoalStatus { get; set; }
+
         void Activate();
-        int Process();
+
+        GoalStatus Process();
+
         void Terminate();
     }
 }

@@ -10,10 +10,13 @@ namespace Arce.Behaviour
 {
     class SeekBehaviour : SteeringBehaviour
     {
-        public SeekBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
+        private Vector2 target;
+
+        public SeekBehaviour(DynamicGameEntity dynamicEntity, Vector2 target) : base(dynamicEntity)
         {
+            this.target = target;
         }
 
-        public override Vector2 Calculate() => SteeringBehaviours.Seek(DynamicEntity, DynamicEntity.Targets.First());
+        public override Vector2 Calculate() => SteeringBehaviours.Seek(DynamicEntity, target);
     }
 }

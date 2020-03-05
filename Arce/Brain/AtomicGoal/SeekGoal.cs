@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arce.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,21 @@ namespace Arce.Brain
 {
     class SeekGoal : IGoal
     {
+        public GoalStatus GoalStatus { get; set; }
+
+        public SeekGoal(DynamicGameEntity dynamicGameEntity)
+        {
+
+        }
+
         public void Activate()
         {
+            GoalStatus = GoalStatus.Active;
+
             throw new NotImplementedException();
         }
 
-        public int Process()
+        public GoalStatus Process()
         {
             throw new NotImplementedException();
         }
