@@ -29,9 +29,12 @@ namespace Arce
         private bool showGraph = false;
 
         public Vector2 Target = new Vector2(200, 200);
+
+        // Content 
         public Texture2D chickenTexture;
         public Texture2D sheepTexture;
         public Texture2D mageTexture;
+        public SpriteFont font;
 
         private GameWorld()
         {
@@ -86,10 +89,11 @@ namespace Arce
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load textures
+            // Load content
             chickenTexture = Content.Load<Texture2D>("chicken");
             sheepTexture = Content.Load<Texture2D>("sheep");
             mageTexture = Content.Load<Texture2D>("mage");
+            font = Content.Load<SpriteFont>("info");
         }
 
         protected override void UnloadContent()

@@ -17,6 +17,7 @@ namespace Arce.Entity
         private Vector2 oldTarget = new Vector2(0, 0);
         private Dictionary<string, Rectangle> animations = new Dictionary<string, Rectangle>();
         private string curAnimation = "front";
+        private string goalInfo = "no info";
 
         public Hero(Vector2 pos) : base(pos)
         {
@@ -54,6 +55,7 @@ namespace Arce.Entity
 
 
             spriteBatch.Draw(GameWorld.Instance.mageTexture, Pos, animations[curAnimation], Color.White);
+            spriteBatch.DrawString(GameWorld.Instance.font, goalInfo, new Vector2(Pos.X + 28, Pos.Y), Color.Black);
         }
     }
 }
