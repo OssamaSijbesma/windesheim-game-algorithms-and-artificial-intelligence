@@ -25,10 +25,14 @@ namespace Arce.Entity
             SteeringBehaviour = new SeekBehaviour(this, pos);
             Brain = new FollowTargetGoal(this);
 
-            animations.Add("front", new Rectangle(0, 0, 16, 16));
-            animations.Add("back", new Rectangle(16, 0, 16, 16));
-            animations.Add("left", new Rectangle(32, 0, 16, 16));
-            animations.Add("right", new Rectangle(48, 0, 16, 16));
+            animations.Add("front", new Rectangle(24, 24, 24, 24));
+            animations.Add("front-left", new Rectangle(48, 0, 24, 24));
+            animations.Add("front-right", new Rectangle(48, 24, 24, 24));
+            animations.Add("back", new Rectangle(0, 0, 24, 24));
+            animations.Add("back-left", new Rectangle(24, 0, 24, 24));
+            animations.Add("back-right", new Rectangle(0, 24, 24, 24));
+            animations.Add("left", new Rectangle(0, 48, 24, 24));
+            animations.Add("right", new Rectangle(24, 48, 24, 24));
         }
 
         public override void Update(float timeElapsed)
@@ -39,12 +43,17 @@ namespace Arce.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Heading.X > 0.5) curAnimation = "back";
-            else if (Heading.X < -0.5) curAnimation = "right";
-            else if (Heading.Y > 0.5) curAnimation = "left";
-            else if (Heading.Y < -0.5) curAnimation = "front";
+            if (Heading.X > 0.5 && Heading.Y > 0.5) curAnimation = "front-right";
+            else if (Heading.X < -0.5 && Heading.Y > 0.5) curAnimation = "front-left";
+            else if (Heading.X > 0.5 && Heading.Y < -0.5) curAnimation = "back-right";
+            else if (Heading.X < -0.5 && Heading.Y < -0.5) curAnimation = "back-left";
+            else if (Heading.X > 0.5) curAnimation = "right";
+            else if (Heading.X < -0.5) curAnimation = "left";
+            else if (Heading.Y > 0.5) curAnimation = "front";
+            else if (Heading.Y < -0.5) curAnimation = "back";
 
-            spriteBatch.Draw(GameWorld.Instance.chickenTexture, Pos, animations[curAnimation], Color.White);
+
+            spriteBatch.Draw(GameWorld.Instance.mageTexture, Pos, animations[curAnimation], Color.White);
         }
     }
 }

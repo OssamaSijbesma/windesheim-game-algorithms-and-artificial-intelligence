@@ -89,6 +89,7 @@ namespace Arce
             // Load textures
             chickenTexture = Content.Load<Texture2D>("chicken");
             sheepTexture = Content.Load<Texture2D>("sheep");
+            mageTexture = Content.Load<Texture2D>("mage");
         }
 
         protected override void UnloadContent()
