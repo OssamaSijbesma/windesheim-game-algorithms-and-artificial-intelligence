@@ -65,5 +65,10 @@ namespace Arce.Brain
         public void Terminate()
         {
         }
+
+        public override string ToString()
+        {
+            return $"Traverse Vertex {target}";
+        }
     }
 }

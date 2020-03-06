@@ -66,5 +66,12 @@ namespace Arce.Brain
             GoalStatus = GoalStatus.Completed;
             
         }
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("Follow Target");
+            Subgoals.ForEach(g => stringBuilder.AppendLine($"  {g.ToString()}"));
+            return stringBuilder.ToString();
+        }
     }
 }
