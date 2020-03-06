@@ -26,5 +26,10 @@ namespace Arce.Brain
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            return "Think" + Environment.NewLine + base.ToString();
+        }
     }
 }

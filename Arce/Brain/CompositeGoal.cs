@@ -35,5 +35,12 @@ namespace Arce.Brain
         public abstract void Terminate();
 
         public virtual void AddSubgoal(IGoal goal) => Subgoals.Add(goal);
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            Subgoals.ForEach(g => stringBuilder.AppendLine($"  {g.ToString()}"));
+            return stringBuilder.ToString();
+        }
     }
 }
