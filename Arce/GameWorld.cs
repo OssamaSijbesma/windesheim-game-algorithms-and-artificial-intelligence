@@ -12,8 +12,8 @@ namespace Arce
 {
     class GameWorld : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         private static GameWorld instance = new GameWorld();
 
@@ -23,14 +23,16 @@ namespace Arce
         private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
         private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
 
+        // Input states
         private MouseState mouseState = Mouse.GetState();
         private KeyboardState previousState =  Keyboard.GetState();
 
         private bool showGraph = false;
+        public bool showInfo = false;
 
         public Vector2 Target = new Vector2(200, 200);
 
-        // Content 
+        // Public Content 
         public Texture2D chickenTexture;
         public Texture2D sheepTexture;
         public Texture2D mageTexture;
@@ -110,6 +112,10 @@ namespace Arce
             // Show graph when G pressed
             if (Keyboard.GetState().IsKeyDown(Keys.G) && !previousState.IsKeyDown(Keys.G))
                 showGraph = !showGraph;
+
+            // Show graph when G pressed
+            if (Keyboard.GetState().IsKeyDown(Keys.I) && !previousState.IsKeyDown(Keys.I))
+                showInfo = !showInfo;
 
             // Set target
             mouseState = Mouse.GetState();

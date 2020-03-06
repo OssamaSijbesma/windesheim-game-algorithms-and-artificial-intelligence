@@ -70,7 +70,7 @@ namespace Arce.Entity
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(GameWorld.Instance.mageTexture, Pos, animationFrames[animation], Color.White);
-            spriteBatch.DrawString(GameWorld.Instance.font, goalInfo, new Vector2(Pos.X + 28, Pos.Y), Color.Black);
+            if(GameWorld.Instance.showInfo) spriteBatch.DrawString(GameWorld.Instance.font, goalInfo, new Vector2(Pos.X + 28, Pos.Y), Color.Black);
         }
     }
 }
