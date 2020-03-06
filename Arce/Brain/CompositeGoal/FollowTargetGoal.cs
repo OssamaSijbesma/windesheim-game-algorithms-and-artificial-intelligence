@@ -27,6 +27,9 @@ namespace Arce.Brain
 
         public override GoalStatus Process()
         {
+
+            Subgoals.RemoveAll(g => g.GoalStatus == GoalStatus.Completed);
+
             Activate();
 
             // When the target changes reset the path
@@ -47,12 +50,11 @@ namespace Arce.Brain
                     Path.AddFirst(vertex.coordinate);
             }
 
-            if (Path.Count != 0)
+            if (Path.Count != 0 && !Subgoals.OfType<TraverseVertexGoal>().Any())
             {
                 AddSubgoal(new TraverseVertexGoal(DynamicEntity, Path.First(), Path.Count));
                 Path.RemoveFirst();
             }
-
 
             Subgoals.ForEach(g => g.Process());
 

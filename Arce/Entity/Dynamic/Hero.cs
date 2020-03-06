@@ -16,7 +16,7 @@ namespace Arce.Entity
     {
         private Vector2 oldTarget = new Vector2(0, 0);
         private Dictionary<string, Rectangle> animations = new Dictionary<string, Rectangle>();
-        private string curAnimation = "up";
+        private string curAnimation = "front";
 
         public Hero(Vector2 pos) : base(pos)
         {
