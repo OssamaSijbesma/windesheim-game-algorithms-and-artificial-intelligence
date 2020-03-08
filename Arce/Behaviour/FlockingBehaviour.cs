@@ -18,10 +18,10 @@ namespace Arce.Behaviour
 
         public FlockingBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
         {
-            maxSteeringForce = 5.0F;
-            separationAmount = 140.0F;
-            cohesionAmount = 1.0F;
-            alignmentAmount = 1.0F;
+            maxSteeringForce = 5;
+            separationAmount = 70;
+            cohesionAmount = 1;
+            alignmentAmount = 1;
         }
 
         public override Vector2 Calculate()
@@ -32,9 +32,11 @@ namespace Arce.Behaviour
             DynamicEntity.entityManager.EnforceNonPenetrationConstraint(DynamicEntity);
             List<DynamicGameEntity> entities = DynamicEntity.entityManager.GetMovingEntities();
 
-            steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Cohesion(DynamicEntity, entities), cohesionAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
+
+            Console.WriteLine(steeringForce);
             return steeringForce.Truncate(maxSteeringForce);
         }
     }
