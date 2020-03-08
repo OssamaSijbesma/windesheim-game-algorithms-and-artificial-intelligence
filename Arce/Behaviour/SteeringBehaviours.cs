@@ -51,6 +51,45 @@ namespace Arce.Behaviour
             return Vector2.Subtract(desiredVelocity, entity.Velocity);
         }
 
+        public static Vector2 Wander(DynamicGameEntity entity, float wanderRadius, float wanderDistance, float wanderJitter)
+        {
+            Random random = new Random();
+            Vector2 wanderTarget = new Vector2(RandomDirection(random) * wanderJitter, RandomDirection(random) * wanderJitter);
+
+            // Reproject this new vector back onto a unit circle.
+            wanderTarget.Normalize();
+
+            // Increase the length of the vector to the same as the radius of the wander circle.
+            wanderTarget = Vector2.Multiply(wanderTarget, wanderRadius);
+
+            // Add the wanderdistance 
+            wanderTarget.X += wanderDistance;
+
+            // rotation matrix from localheading to world
+            Matrix2D matrix2D = new Matrix2D();
+            matrix2D.M11 = entity.Heading.X;
+            matrix2D.M12 = entity.Heading.Y;
+            matrix2D.M21 = entity.Side.X;
+            matrix2D.M22 = entity.Side.Y;
+
+            // translate Matrix relative to local pos
+            Matrix2D translateMatrix = new Matrix2D();
+            translateMatrix.M11 = 1;
+            translateMatrix.M22 = 1;
+            translateMatrix.M31 = entity.Pos.X;
+            translateMatrix.M32 = entity.Pos.Y;
+
+            Vector2 targetWorld = translateMatrix.Transform(matrix2D.Transform(wanderTarget));
+
+            return Vector2.Subtract(targetWorld, entity.Pos);
+        }
+
+        private static float RandomDirection(Random random)
+        {
+            float next = (float) random.NextDouble();
+            return -1 + (next * 2);
+        }
+
         public static Vector2 Separation(DynamicGameEntity entity, List<DynamicGameEntity> neighbours) 
         {
             Vector2 steeringForce = new Vector2(0, 0);

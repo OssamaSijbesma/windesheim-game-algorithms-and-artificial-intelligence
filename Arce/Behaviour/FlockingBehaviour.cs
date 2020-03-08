@@ -15,6 +15,8 @@ namespace Arce.Behaviour
         private float separationAmount;
         private float cohesionAmount;
         private float alignmentAmount;
+        private float wanderAmount;
+
 
         public FlockingBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
         {
@@ -22,6 +24,7 @@ namespace Arce.Behaviour
             separationAmount = 70;
             cohesionAmount = 1;
             alignmentAmount = 1;
+            wanderAmount = 1;
         }
 
         public override Vector2 Calculate()
@@ -35,6 +38,7 @@ namespace Arce.Behaviour
             steeringForce += Vector2.Multiply(SteeringBehaviours.Cohesion(DynamicEntity, entities), cohesionAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Wander(DynamicEntity, 20, 5, 5), wanderAmount);
 
             Console.WriteLine(steeringForce);
             return steeringForce.Truncate(maxSteeringForce);
