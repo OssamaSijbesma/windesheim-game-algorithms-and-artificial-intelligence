@@ -28,14 +28,13 @@ namespace Arce.Behaviour
         {
             Vector2 steeringForce = new Vector2(0, 0);
 
-            GameWorld.Instance.TagNeighbours(DynamicEntity, 100);
-            List<DynamicGameEntity> entities = GameWorld.Instance.GetMovingEntities();
-
-            DynamicEntity.EnforceNonPenetrationConstraint(GameWorld.Instance.GetMovingEntities());
+            DynamicEntity.entityManager.TagNeighbours(DynamicEntity, 100);
+            DynamicEntity.entityManager.EnforceNonPenetrationConstraint(DynamicEntity);
+            List<DynamicGameEntity> entities = DynamicEntity.entityManager.GetMovingEntities();
 
             steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Cohesion(DynamicEntity, entities), cohesionAmount);
-            //steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
+            steeringForce += Vector2.Multiply(SteeringBehaviours.Alignment(DynamicEntity, entities), alignmentAmount);
             return steeringForce.Truncate(maxSteeringForce);
         }
     }

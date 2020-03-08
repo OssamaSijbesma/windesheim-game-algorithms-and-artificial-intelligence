@@ -14,19 +14,18 @@ namespace Arce.Entity
 {
     class Hero : DynamicGameEntity
     {
-        private Vector2 oldTarget = new Vector2(0, 0);
         private Rectangle[] animationFrames;
-        private int animation;
-        private string goalInfo;
+        private int direction;
+        private IGoal brain;
 
-        public Hero(Vector2 pos) : base(pos)
+        public Hero(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
         {
             Mass = 1.0F;
             MaxSpeed = 80.0F;
+            brain = new FollowTargetGoal(this);
             SteeringBehaviour = new SeekBehaviour(this, pos);
-            Brain = new FollowTargetGoal(this);
-            goalInfo = "no info";
 
+            // Set animation frames
             animationFrames = new Rectangle[]
             {
                 new Rectangle(24, 24, 24, 24),  // North
@@ -38,39 +37,29 @@ namespace Arce.Entity
                 new Rectangle(0, 48, 24, 24),   // West
                 new Rectangle(48, 0, 24, 24)    // North West
             };
-            /*
-            animations.Add("front", new Rectangle(24, 24, 24, 24));
-            animations.Add("front-left", new Rectangle(48, 0, 24, 24));
-            animations.Add("front-right", new Rectangle(48, 24, 24, 24));
-            animations.Add("back", new Rectangle(0, 0, 24, 24));
-            animations.Add("back-left", new Rectangle(24, 0, 24, 24));
-            animations.Add("back-right", new Rectangle(0, 24, 24, 24));
-            animations.Add("left", new Rectangle(0, 48, 24, 24));
-            animations.Add("right", new Rectangle(24, 48, 24, 24));
-            */
         }
 
         public override void Update(float timeElapsed)
         {
-            Brain.Process();
-            goalInfo = Brain.ToString();
+            brain.Process();
 
             base.Update(timeElapsed);
 
-            if (Heading.X > 0.5 && Heading.Y > 0.5) animation = 1;
-            else if (Heading.X > 0.5 && Heading.Y < -0.5) animation = 3;
-            else if (Heading.X < -0.5 && Heading.Y < -0.5) animation = 5;
-            else if (Heading.X < -0.5 && Heading.Y > 0.5) animation = 7;
-            else if (Heading.Y > 0.5) animation = 0;
-            else if (Heading.X > 0.5) animation = 2;
-            else if (Heading.Y < -0.5) animation = 4;
-            else if (Heading.X < -0.5) animation = 6;
+            // Set the animation direction
+            if (Heading.X > 0.5 && Heading.Y > 0.5) direction = 1;
+            else if (Heading.X > 0.5 && Heading.Y < -0.5) direction = 3;
+            else if (Heading.X < -0.5 && Heading.Y < -0.5) direction = 5;
+            else if (Heading.X < -0.5 && Heading.Y > 0.5) direction = 7;
+            else if (Heading.Y > 0.5) direction = 0;
+            else if (Heading.X > 0.5) direction = 2;
+            else if (Heading.Y < -0.5) direction = 4;
+            else if (Heading.X < -0.5) direction = 6;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GameWorld.Instance.mageTexture, Pos, animationFrames[animation], Color.White);
-            if(GameWorld.Instance.showInfo) spriteBatch.DrawString(GameWorld.Instance.font, goalInfo, new Vector2(Pos.X + 28, Pos.Y), Color.Black);
+            spriteBatch.Draw(entityManager.mageTexture, Pos, animationFrames[direction], Color.White);
+            if(GameWorld.Instance.showInfo) spriteBatch.DrawString(entityManager.font, brain.ToString(), new Vector2(Pos.X + 28, Pos.Y), Color.Black);
         }
     }
 }

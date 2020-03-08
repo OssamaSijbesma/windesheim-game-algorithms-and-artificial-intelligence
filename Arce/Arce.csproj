@@ -52,10 +52,13 @@
     <Compile Include="Behaviour\SteeringBehaviour.cs" />
     <Compile Include="Behaviour\SteeringBehaviours.cs" />
     <Compile Include="Brain\CompositeGoal.cs" />
+    <Compile Include="Entity\Dynamic\AbstractFactory\SheepFactory.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
     <Compile Include="Entity\Dynamic\Sheep.cs" />
     <Compile Include="Entity\Dynamic\Hero.cs" />
+    <Compile Include="Entity\Dynamic\AbstractFactory\IDynamicGameEntityFactory.cs" />
+    <Compile Include="Entity\EntityManager.cs" />
     <Compile Include="Entity\StaticGameEntity.cs" />
     <Compile Include="GameWorld.cs" />
     <None Include="GameWorld.cs.old" />

@@ -12,31 +12,26 @@ namespace Arce
 {
     class GameWorld : Game
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-
+        // Singleton
         private static GameWorld instance = new GameWorld();
-
-        private TiledMap map;
-        public Graph navigationGraph;
-        private TiledMapRenderer mapRenderer;
-        private List<StaticGameEntity> staticEntities = new List<StaticGameEntity>();
-        private List<DynamicGameEntity> dynamicEntities = new List<DynamicGameEntity>();
 
         // Input states
         private MouseState mouseState = Mouse.GetState();
-        private KeyboardState previousState =  Keyboard.GetState();
+        private KeyboardState previousState = Keyboard.GetState();
 
-        private bool showGraph = false;
+        // Private variables
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private TiledMap map;
+        private TiledMapRenderer mapRenderer;
+
+        // Public variables
+        public Graph navigationGraph;
+        public EntityManager entityManager;
+        public bool showGraph = false;
         public bool showInfo = false;
 
         public Vector2 Target = new Vector2(200, 200);
-
-        // Public Content 
-        public Texture2D chickenTexture;
-        public Texture2D sheepTexture;
-        public Texture2D mageTexture;
-        public SpriteFont font;
 
         private GameWorld()
         {
@@ -47,21 +42,19 @@ namespace Arce
             graphics.PreferredBackBufferHeight = 960;
             graphics.ApplyChanges();
 
+            // Set root directory
             Content.RootDirectory = "Content";
         }
 
         public static GameWorld Instance => instance;
 
-        internal List<DynamicGameEntity> GetMovingEntities() => dynamicEntities;
-
-
         protected override void Initialize()
         {
+            // Display the mouse
+            this.IsMouseVisible = true;
+
             // Load the compiled map
             map = Content.Load<TiledMap>("TiledMap/structure");
-
-            // Generate the graph with the map
-            navigationGraph = new Graph(map);
 
             // Make sure the graphicsdevice 
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
@@ -69,19 +62,11 @@ namespace Arce
             // Create the map renderer
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
-            // Display the mouse
-            this.IsMouseVisible = true;
+            // Generate the graph with the map
+            navigationGraph = new Graph(map);
 
-            dynamicEntities.Add(new Hero(new Vector2(20, 20)));
-            dynamicEntities.Add(new Sheep(new Vector2(230, 200)));
-            dynamicEntities.Add(new Sheep(new Vector2(201, 180)));
-            dynamicEntities.Add(new Sheep(new Vector2(222, 160)));
-            dynamicEntities.Add(new Sheep(new Vector2(213, 210)));
-            dynamicEntities.Add(new Sheep(new Vector2(204, 200)));
-            dynamicEntities.Add(new Sheep(new Vector2(205, 201)));
-            dynamicEntities.Add(new Sheep(new Vector2(205, 202)));
-            dynamicEntities.Add(new Sheep(new Vector2(205, 240)));
-            dynamicEntities.Add(new Sheep(new Vector2(205, 207)));
+            // Initialize the entity manager
+            entityManager = new EntityManager();
 
             base.Initialize();
         }
@@ -91,11 +76,8 @@ namespace Arce
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load content
-            chickenTexture = Content.Load<Texture2D>("chicken");
-            sheepTexture = Content.Load<Texture2D>("sheep");
-            mageTexture = Content.Load<Texture2D>("mage");
-            font = Content.Load<SpriteFont>("info");
+            // Load entity content
+            entityManager.LoadContent(Content);
         }
 
         protected override void UnloadContent()
@@ -125,8 +107,8 @@ namespace Arce
             // Update the map
             mapRenderer.Update(map, gameTime);
 
-            // Update the dynamic entity
-            dynamicEntities.ForEach(d => d.Update((float)gameTime.ElapsedGameTime.TotalSeconds * 0.8F));
+            // Update the entity managers
+            entityManager.Update(gameTime);
 
             // Record previous state
             previousState = Keyboard.GetState();
@@ -142,33 +124,13 @@ namespace Arce
             // Draw the map
             mapRenderer.Draw(map);
 
-            // Draw NavGraph when 
+            // Draw the naviagtion graph
             if (showGraph) navigationGraph.Draw(spriteBatch);
 
             // Draw the entities
-            spriteBatch.Begin();
-            staticEntities.ForEach(s => s.Draw(spriteBatch));
-            dynamicEntities.ForEach(d => d.Draw(spriteBatch));
-            spriteBatch.End();
+            entityManager.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }
-
-        public void TagNeighbours(DynamicGameEntity centralEntity, double radius)
-        {
-            foreach (DynamicGameEntity entity in dynamicEntities)
-            {
-                // Clear current tag.
-                entity.Tag = false;
-
-                // Calculate the difference in space
-                Vector2 difference = Vector2.Subtract(entity.Pos, centralEntity.Pos);
-
-                // When the entity is in range it gets tageed.
-                if (entity != centralEntity && difference.LengthSquared() < radius * radius)
-                    entity.Tag = true;
-            }
-        }
-
     }
 }

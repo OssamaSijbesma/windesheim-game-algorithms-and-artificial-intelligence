@@ -2,15 +2,18 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace Arce
+namespace Arce.Entity
 {
     abstract class BaseGameEntity
     {
         public Vector2 Pos { get; set; }
         public float Scale { get; set; }
 
-        public BaseGameEntity(Vector2 pos)
+        public readonly EntityManager entityManager;
+
+        public BaseGameEntity(EntityManager entityManager, Vector2 pos)
         {
+            this.entityManager = entityManager;
             Pos = pos;
         }
 
