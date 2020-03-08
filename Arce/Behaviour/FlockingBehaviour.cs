@@ -20,11 +20,11 @@ namespace Arce.Behaviour
 
         public FlockingBehaviour(DynamicGameEntity dynamicEntity) : base(dynamicEntity)
         {
-            maxSteeringForce = 5;
-            separationAmount = 70;
-            cohesionAmount = 1;
-            alignmentAmount = 1;
-            wanderAmount = 1;
+            maxSteeringForce = 5.0F;
+            separationAmount = 140.0F;
+            cohesionAmount = 1.0F;
+            alignmentAmount = 1.0F;
+            wanderAmount = 1.0F;
         }
 
         public override Vector2 Calculate()
