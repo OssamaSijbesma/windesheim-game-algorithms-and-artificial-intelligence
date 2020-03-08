@@ -35,12 +35,9 @@ namespace Arce.Brain
             if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
             if (GoalStatus == GoalStatus.Inactive) Activate();
 
-
             // Remove waypoints if the hero gets close
             if (Vector2.Subtract(target, dynamicGameEntity.Pos).Length() < 16)
                 GoalStatus = GoalStatus.Completed;
-
-
 
             // Decide what behaviour is fitting
             switch (vertexCount)

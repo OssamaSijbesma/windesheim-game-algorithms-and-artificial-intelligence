@@ -27,10 +27,11 @@ namespace Arce.Brain
 
         public override GoalStatus Process()
         {
+            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
+            if (GoalStatus == GoalStatus.Inactive) Activate();
 
             Subgoals.RemoveAll(g => g.GoalStatus == GoalStatus.Completed);
 
-            Activate();
 
             // When the target changes reset the path
             if (oldTarget != GameWorld.Instance.Target)

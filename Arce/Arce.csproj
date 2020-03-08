@@ -51,7 +51,10 @@
     <Compile Include="Behaviour\SeekBehaviour.cs" />
     <Compile Include="Behaviour\SteeringBehaviour.cs" />
     <Compile Include="Behaviour\SteeringBehaviours.cs" />
+    <Compile Include="Brain\AtomicGoal\EatGoal.cs" />
+    <Compile Include="Brain\AtomicGoal\SleepGoal.cs" />
     <Compile Include="Brain\CompositeGoal.cs" />
+    <Compile Include="Brain\CompositeGoal\VitalityGoal.cs" />
     <Compile Include="Entity\Dynamic\AbstractFactory\SheepFactory.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />
@@ -62,7 +65,6 @@
     <Compile Include="Entity\StaticGameEntity.cs" />
     <Compile Include="GameWorld.cs" />
     <None Include="GameWorld.cs.old" />
-    <Compile Include="Brain\AtomicGoal\SeekGoal.cs" />
     <Compile Include="Brain\AtomicGoal\TraverseVertexGoal.cs" />
     <Compile Include="Brain\CompositeGoal\FollowTargetGoal.cs" />
     <Compile Include="Brain\CompositeGoal\ThinkGoal.cs" />

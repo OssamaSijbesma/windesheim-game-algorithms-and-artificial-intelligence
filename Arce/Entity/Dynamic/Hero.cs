@@ -22,7 +22,7 @@ namespace Arce.Entity
         {
             Mass = 1.0F;
             MaxSpeed = 80.0F;
-            brain = new FollowTargetGoal(this);
+            brain = new ThinkGoal(this);
             SteeringBehaviour = new SeekBehaviour(this, pos);
 
             // Set animation frames

@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    class ThinkGoal : CompositeGoal
+    class VitalityGoal : CompositeGoal
     {
-        public ThinkGoal(DynamicGameEntity dynamicGameEntity) : base(dynamicGameEntity)
-        { }
+        public VitalityGoal(DynamicGameEntity dynamicEntity) :base(dynamicEntity)
+        {
+        
+        }
 
         public override void Activate()
         {
@@ -19,15 +21,15 @@ namespace Arce.Brain
 
         public override GoalStatus Process()
         {
-            if (GoalStatus == GoalStatus.Inactive) Activate();
+            if (!Subgoals.OfType<EatGoal>().Any())
+                AddSubgoal(new EatGoal(DynamicEntity));
 
-            if (GameWorld.Instance.Target != default && !Subgoals.OfType<FollowTargetGoal>().Any())
-                AddSubgoal(new FollowTargetGoal(DynamicEntity));
+            if (!Subgoals.OfType<SleepGoal>().Any())
+                AddSubgoal(new SleepGoal(DynamicEntity));
 
-            if (!Subgoals.OfType<VitalityGoal>().Any())
-                AddSubgoal(new VitalityGoal(DynamicEntity));
 
             Subgoals.ForEach(g => g.Process());
+
 
             return GoalStatus;
         }
@@ -38,7 +40,7 @@ namespace Arce.Brain
 
         public override string ToString()
         {
-            return "Think" + Environment.NewLine + base.ToString();
+            return "Vitality" + Environment.NewLine + base.ToString();
         }
     }
 }

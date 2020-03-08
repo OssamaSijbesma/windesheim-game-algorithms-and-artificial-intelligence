@@ -7,13 +7,6 @@ using System.Threading.Tasks;
 
 namespace Arce.Brain
 {
-    enum GoalType
-    {
-        FollowTargetGoal,
-        TraverseVertexGoal,
-        SeekGoal
-    }
-
     abstract class CompositeGoal : IGoal
     {
         public DynamicGameEntity DynamicEntity { get; set; }

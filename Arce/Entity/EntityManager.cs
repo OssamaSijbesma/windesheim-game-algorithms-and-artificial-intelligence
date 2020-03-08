@@ -23,7 +23,7 @@ namespace Arce.Entity
 
         public EntityManager() 
         {
-            dynamicEntities.Add(new Hero(this, new Vector2(20, 20)));
+            dynamicEntities.Add(new Hero(this, new Vector2(300, 300)));
 
             IDynamicGameEntityFactory sheepfactory = new SheepFactory(this);
             dynamicEntities.AddRange(sheepfactory.CreateEntities(new Vector2(230, 200), 20, 13));

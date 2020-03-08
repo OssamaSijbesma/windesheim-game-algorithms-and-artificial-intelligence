@@ -31,7 +31,7 @@ namespace Arce
         public bool showGraph = false;
         public bool showInfo = false;
 
-        public Vector2 Target = new Vector2(200, 200);
+        public Vector2 Target = new Vector2(100,100);
 
         private GameWorld()
         {
