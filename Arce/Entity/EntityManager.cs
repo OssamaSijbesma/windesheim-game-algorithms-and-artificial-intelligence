@@ -25,15 +25,8 @@ namespace Arce.Entity
         {
             dynamicEntities.Add(new Hero(this, new Vector2(20, 20)));
 
-            dynamicEntities.Add(new Sheep(this, new Vector2(230, 200)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(201, 180)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(222, 160)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(213, 210)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(204, 200)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(205, 201)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(205, 202)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(205, 240)));
-            dynamicEntities.Add(new Sheep(this, new Vector2(205, 207)));
+            IDynamicGameEntityFactory sheepfactory = new SheepFactory(this);
+            dynamicEntities.AddRange(sheepfactory.CreateEntities(new Vector2(230, 200), 20, 13));
         }
 
         public void LoadContent(ContentManager Content) 
