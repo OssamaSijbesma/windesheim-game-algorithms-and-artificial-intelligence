@@ -11,6 +11,7 @@ namespace Arce.Entity
     {
         public StaticGameEntity(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
         {
+
         }
 
         public override void Update(float delta)
