@@ -40,7 +40,6 @@ namespace Arce.Behaviour
             steeringForce += Vector2.Multiply(SteeringBehaviours.Separation(DynamicEntity, entities), separationAmount);
             steeringForce += Vector2.Multiply(SteeringBehaviours.Wander(DynamicEntity, 20, 5, 5), wanderAmount);
 
-            Console.WriteLine(steeringForce);
             return steeringForce.Truncate(maxSteeringForce);
         }
     }

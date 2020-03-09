@@ -18,6 +18,7 @@ namespace Arce.Entity
         private int direction;
         private IGoal brain;
         private int ticks;
+        private float totalTime;
 
         public Hero(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
         {
@@ -46,9 +47,12 @@ namespace Arce.Entity
 
             base.Update(timeElapsed);
 
-            ticks++;
-            if (ticks % 10000 == 0)
+            totalTime += timeElapsed;
+            if (totalTime > 1)
+            {
+                totalTime = 0;
                 Sleep--;
+            }
 
             // Set the animation direction
             if (Heading.X > 0.5 && Heading.Y > 0.5) direction = 1;
