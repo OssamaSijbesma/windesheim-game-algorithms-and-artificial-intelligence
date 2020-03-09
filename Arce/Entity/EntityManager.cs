@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Arce.Entity.Static;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,6 +20,7 @@ namespace Arce.Entity
         public Texture2D chickenTexture;
         public Texture2D sheepTexture;
         public Texture2D mageTexture;
+        public Texture2D tentTexture;
         public SpriteFont font;
 
         public EntityManager() 
@@ -27,6 +29,8 @@ namespace Arce.Entity
 
             IDynamicGameEntityFactory sheepfactory = new SheepFactory(this);
             dynamicEntities.AddRange(sheepfactory.CreateEntities(new Vector2(230, 200), 20, 13));
+
+            staticEntities.Add(new Tent(this, new Vector2(900, 300)));
         }
 
         public void LoadContent(ContentManager Content) 
@@ -35,6 +39,7 @@ namespace Arce.Entity
             chickenTexture = Content.Load<Texture2D>("chicken");
             sheepTexture = Content.Load<Texture2D>("sheep");
             mageTexture = Content.Load<Texture2D>("mage");
+            tentTexture = Content.Load<Texture2D>("tent");
             font = Content.Load<SpriteFont>("info");
         }
 
