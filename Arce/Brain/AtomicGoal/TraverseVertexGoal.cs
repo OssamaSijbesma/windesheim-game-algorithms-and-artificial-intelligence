@@ -17,7 +17,6 @@ namespace Arce.Brain
         private Vector2 target;
         private int vertexCount;
 
-
         public TraverseVertexGoal(DynamicGameEntity dynamicGameEntity, Vector2 target, int vertexCount)
         {
             this.dynamicGameEntity = dynamicGameEntity;
@@ -32,8 +31,11 @@ namespace Arce.Brain
 
         public GoalStatus Process()
         {
-            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
+            // Activate goal when inactive
             if (GoalStatus == GoalStatus.Inactive) Activate();
+
+            // When completed or failed return
+            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
 
             // Remove waypoints if the hero gets close
             if (Vector2.Subtract(target, dynamicGameEntity.Pos).Length() < 16)

@@ -1,4 +1,5 @@
 ﻿using Arce.Entity;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Arce.Brain
 {
     class ThinkGoal : CompositeGoal
     {
+        private Vector2 oldTarget;
+
         public ThinkGoal(DynamicGameEntity dynamicGameEntity) : base(dynamicGameEntity)
         { }
 
@@ -21,12 +24,20 @@ namespace Arce.Brain
         {
             if (GoalStatus == GoalStatus.Inactive) Activate();
 
-            if (GameWorld.Instance.Target != default && !Subgoals.OfType<FollowTargetGoal>().Any())
-                AddSubgoal(new FollowTargetGoal(DynamicEntity));
+            // Remove all completed subgoals
+            Subgoals.RemoveAll(g => g.GoalStatus == GoalStatus.Completed || g.GoalStatus == GoalStatus.Failed);
 
             if (!Subgoals.OfType<VitalityGoal>().Any())
                 AddSubgoal(new VitalityGoal(DynamicEntity));
 
+            // If the target changes start a follow target goal
+            if (oldTarget != GameWorld.Instance.Target)
+            {
+                AddSubgoal(new FollowTargetGoal(DynamicEntity));
+                oldTarget = GameWorld.Instance.Target;
+            }
+
+            // Process all subgoals
             Subgoals.ForEach(g => g.Process());
 
             return GoalStatus;
