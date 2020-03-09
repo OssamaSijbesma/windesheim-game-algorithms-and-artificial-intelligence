@@ -39,7 +39,7 @@ namespace Arce.Brain
 
             // Remove waypoints if the hero gets close
             if (Vector2.Subtract(target, dynamicGameEntity.Pos).Length() < 16)
-                GoalStatus = GoalStatus.Completed;
+                Terminate();
 
             // Decide what behaviour is fitting
             switch (vertexCount)
@@ -63,6 +63,8 @@ namespace Arce.Brain
 
         public void Terminate()
         {
+            GoalStatus = GoalStatus.Completed;
+            dynamicGameEntity.Hunger--;
         }
 
         public override string ToString()

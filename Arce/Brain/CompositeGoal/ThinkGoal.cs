@@ -27,10 +27,11 @@ namespace Arce.Brain
             // Remove all completed subgoals
             Subgoals.RemoveAll(g => g.GoalStatus == GoalStatus.Completed || g.GoalStatus == GoalStatus.Failed);
 
-            if (!Subgoals.OfType<VitalityGoal>().Any())
+            // If hunger or sleep is below a certain point attent to vitality
+            if (!Subgoals.OfType<VitalityGoal>().Any() && (DynamicEntity.Hunger < 5 || DynamicEntity.Sleep < 3))
                 AddSubgoal(new VitalityGoal(DynamicEntity));
 
-            // If the target changes start a follow target goal
+            // If the target changes follow the new target
             if (oldTarget != GameWorld.Instance.Target)
             {
                 AddSubgoal(new FollowTargetGoal(DynamicEntity));

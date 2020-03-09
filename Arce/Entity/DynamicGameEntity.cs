@@ -20,6 +20,9 @@ namespace Arce.Entity
         public float MaxSpeed { get; set; }
         public bool Tag { get; set; }
 
+        public int Hunger { get; set; }
+        public int Sleep { get; set; }
+
         public DynamicGameEntity(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
         {
             Velocity = new Vector2();
@@ -27,6 +30,9 @@ namespace Arce.Entity
             Mass = 1.0F;
             MaxSpeed = 150.0F;
             SteeringBehaviour = new FlockingBehaviour(this);
+
+            Hunger = 10;
+            Sleep = 10;
         }
 
         public override void Update(float timeElapsed)

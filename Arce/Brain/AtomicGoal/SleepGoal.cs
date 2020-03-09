@@ -12,6 +12,7 @@ namespace Arce.Brain
         public GoalStatus GoalStatus { get; set; }
 
         private DynamicGameEntity dynamicGameEntity;
+        private float oldMaxSpeed;
 
         public SleepGoal(DynamicGameEntity dynamicGameEntity) 
         {
@@ -21,19 +22,25 @@ namespace Arce.Brain
         public void Activate()
         {
             GoalStatus = GoalStatus.Active;
+            oldMaxSpeed = dynamicGameEntity.MaxSpeed;
+            //dynamicGameEntity.MaxSpeed = 0;
         }
 
         public GoalStatus Process()
         {
-            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
             if (GoalStatus == GoalStatus.Inactive) Activate();
+            if (dynamicGameEntity.Sleep == 10) Terminate();
+            if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
+
+            dynamicGameEntity.Sleep += 1;
 
             return GoalStatus;
         }
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+            dynamicGameEntity.MaxSpeed = oldMaxSpeed;
+            GoalStatus = GoalStatus.Completed;
         }
 
         public override string ToString()

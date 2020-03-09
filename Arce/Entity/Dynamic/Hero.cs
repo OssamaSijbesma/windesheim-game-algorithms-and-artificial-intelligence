@@ -17,6 +17,7 @@ namespace Arce.Entity
         private Rectangle[] animationFrames;
         private int direction;
         private IGoal brain;
+        private int ticks;
 
         public Hero(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
         {
@@ -44,6 +45,10 @@ namespace Arce.Entity
             brain.Process();
 
             base.Update(timeElapsed);
+
+            ticks++;
+            if (ticks % 10000 == 0)
+                Sleep--;
 
             // Set the animation direction
             if (Heading.X > 0.5 && Heading.Y > 0.5) direction = 1;
