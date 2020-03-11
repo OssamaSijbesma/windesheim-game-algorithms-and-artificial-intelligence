@@ -9,9 +9,12 @@ namespace Arce.Entity
 {
     class StaticGameEntity : BaseGameEntity
     {
-        public StaticGameEntity(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
+        public int TextureWidth { get; set; }
+        public int TextureHeight { get; set; }
+        public StaticGameEntity(EntityManager entityManager, Vector2 pos, int width, int height) : base(entityManager, pos)
         {
-
+            TextureWidth = width;
+            TextureHeight = height;
         }
 
         public override void Update(float delta)

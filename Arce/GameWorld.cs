@@ -62,11 +62,11 @@ namespace Arce
             // Create the map renderer
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
-            // Generate the graph with the map
-            navigationGraph = new Graph(map);
-
             // Initialize the entity manager
             entityManager = new EntityManager();
+
+            // Generate the graph with the map and static entities
+            navigationGraph = new Graph(map, entityManager.GetStaticEntities());
 
             base.Initialize();
         }

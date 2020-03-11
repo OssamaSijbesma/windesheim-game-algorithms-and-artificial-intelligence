@@ -28,7 +28,7 @@ namespace Arce.Brain
             target = GameWorld.Instance.Target;
 
             // Get new path
-            LinkedList<Vertex> newPath = GameWorld.Instance.navigationGraph.Dijkstra(Entity.Pos, GameWorld.Instance.Target);
+            LinkedList<Vertex> newPath = GameWorld.Instance.navigationGraph.AStar(DynamicEntity.Pos, GameWorld.Instance.Target);
 
             // Convert the Vertex into Vector2
             foreach (Vertex vertex in newPath)

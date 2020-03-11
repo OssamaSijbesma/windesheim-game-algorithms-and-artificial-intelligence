@@ -64,7 +64,9 @@
     <Compile Include="Entity\Dynamic\AbstractFactory\IDynamicGameEntityFactory.cs" />
     <Compile Include="Entity\EntityManager.cs" />
     <Compile Include="Entity\StaticGameEntity.cs" />
+    <Compile Include="Entity\Static\House.cs" />
     <Compile Include="Entity\Static\Tent.cs" />
+    <Compile Include="Entity\Static\Tree.cs" />
     <Compile Include="GameWorld.cs" />
     <None Include="GameWorld.cs.old" />
     <Compile Include="Brain\AtomicGoal\TraverseVertexGoal.cs" />
