@@ -21,6 +21,8 @@ namespace Arce.Entity
         public Texture2D sheepTexture;
         public Texture2D mageTexture;
         public Texture2D tentTexture;
+        public Texture2D houseTexture;
+        public Texture2D treeTexture;
         public SpriteFont font;
 
         public EntityManager() 
@@ -30,7 +32,11 @@ namespace Arce.Entity
             IDynamicGameEntityFactory sheepfactory = new SheepFactory(this);
             dynamicEntities.AddRange(sheepfactory.CreateEntities(new Vector2(230, 200), 20, 13));
 
-            staticEntities.Add(new Tent(this, new Vector2(900, 290), 42, 39));
+            //staticEntities.Add(new Tent(this, new Vector2(1300, 450), 42, 39));
+            staticEntities.Add(new House(this, new Vector2(800, 170), 83, 114));
+            staticEntities.Add(new Tree(this, new Vector2(610, 120), 36, 40));
+            staticEntities.Add(new Tree(this, new Vector2(650, 120), 36, 40));
+            staticEntities.Add(new Tree(this, new Vector2(630, 140), 36, 40));
         }
 
         public void LoadContent(ContentManager Content) 
@@ -40,6 +46,8 @@ namespace Arce.Entity
             sheepTexture = Content.Load<Texture2D>("sheep");
             mageTexture = Content.Load<Texture2D>("mage");
             tentTexture = Content.Load<Texture2D>("tent");
+            houseTexture = Content.Load<Texture2D>("house");
+            treeTexture = Content.Load<Texture2D>("tree");
             font = Content.Load<SpriteFont>("info");
         }
 
