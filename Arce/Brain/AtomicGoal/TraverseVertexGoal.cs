@@ -64,7 +64,7 @@ namespace Arce.Brain
         public void Terminate()
         {
             GoalStatus = GoalStatus.Completed;
-            entity.Hunger--;
+            entity.Hunger -= 0.01f;
         }
 
         public override string ToString()

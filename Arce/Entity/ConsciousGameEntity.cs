@@ -20,8 +20,8 @@ namespace Arce.Entity
 
         public ConsciousGameEntity(EntityManager entityManager, Vector2 position) : base(entityManager, position)
         {
-            Sleep = 1;
-            Hunger = 1;
+            Sleep = 1f;
+            Hunger = 1f;
 
             brain = new ThinkGoal(this);
         }
@@ -36,7 +36,7 @@ namespace Arce.Entity
             if (totalTime > 1)
             {
                 totalTime = 0;
-                Sleep -= 0.1f;
+                Sleep -= 0.001f;
             }
         }
 

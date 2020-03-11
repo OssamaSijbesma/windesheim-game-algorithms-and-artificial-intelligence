@@ -26,9 +26,12 @@ namespace Arce.Brain
             GoalStatus = GoalStatus.Active;
             oldMaxSpeed = entity.MaxSpeed;
             entity.MaxSpeed = 0;
-            timer = new Timer(1000);
+
+            timer = new Timer();
+            timer.Interval = 1000;
             timer.AutoReset = true;
             timer.Elapsed += Eat;
+            timer.Enabled = true;
         }
 
         public GoalStatus Process()
