@@ -30,7 +30,7 @@ namespace Arce.Entity
             IDynamicGameEntityFactory sheepfactory = new SheepFactory(this);
             dynamicEntities.AddRange(sheepfactory.CreateEntities(new Vector2(230, 200), 20, 13));
 
-            staticEntities.Add(new Tent(this, new Vector2(900, 300)));
+            staticEntities.Add(new Tent(this, new Vector2(900, 290), 42, 39));
         }
 
         public void LoadContent(ContentManager Content) 
@@ -59,6 +59,7 @@ namespace Arce.Entity
         }
 
         internal List<DynamicGameEntity> GetMovingEntities() => dynamicEntities;
+        internal List<StaticGameEntity> GetStaticEntities() => staticEntities;
 
         public void TagNeighbours(DynamicGameEntity centralEntity, double radius)
         {

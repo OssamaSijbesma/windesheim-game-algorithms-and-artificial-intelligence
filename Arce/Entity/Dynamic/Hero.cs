@@ -17,7 +17,6 @@ namespace Arce.Entity
         private Rectangle[] animationFrames;
         private int direction;
         private IGoal brain;
-        private int ticks;
         private float totalTime;
 
         public Hero(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)

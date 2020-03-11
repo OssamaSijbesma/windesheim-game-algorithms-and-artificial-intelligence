@@ -11,7 +11,7 @@ namespace Arce.Entity.Static
 {
     class Tent : StaticGameEntity
     {
-        public Tent(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
+        public Tent(EntityManager entityManager, Vector2 pos, int width, int height) : base(entityManager, pos, width, height)
         {
         }
 

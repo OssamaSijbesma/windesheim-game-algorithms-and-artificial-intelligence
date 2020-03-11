@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Arce.Entity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
@@ -15,7 +16,7 @@ namespace Arce.NavigationGraph
         public static readonly double INFINITY = System.Double.MaxValue;
         private Dictionary<Vector2, Vertex> vertexMap;
 
-        public Graph(TiledMap map)
+        public Graph(TiledMap map, List<StaticGameEntity> staticGameEntities)
         {
             vertexMap = new Dictionary<Vector2, Vertex>();
 
@@ -24,6 +25,28 @@ namespace Arce.NavigationGraph
                 for (int x = 0; x < map.Width; x++, counter++)
                     if (map.TileLayers[0].Tiles[counter].GlobalIdentifier == 8 && map.TileLayers[1].Tiles[counter].GlobalIdentifier == 0)
                         GetVertex(new Vector2(x * 16 + 8, y * 16 + 8));
+
+            // Remove vertices near static entities 
+            foreach (StaticGameEntity entity in staticGameEntities)
+            {
+                Vector2 vector = GetNearestVertex(entity.Pos);
+                int x = (int)vector.X;
+                int y = (int)vector.Y;
+
+                // Get height and width of the texture
+                int height = entity.TextureHeight;
+                int width = entity.TextureWidth;
+
+                for (int i = x; i < (x + height); i += 16)
+                {
+                    for (int j = y; j < (y + width); j += 16)
+                    {
+                        Vector2 v = new Vector2(i, j);
+                        if (vertexMap.ContainsKey(v))
+                            vertexMap.Remove(v);
+                    }
+                }
+            }
 
             // Generate the edges
             foreach (Vertex vertex in vertexMap.Values)
@@ -43,7 +66,6 @@ namespace Arce.NavigationGraph
                 if (vertexMap.ContainsKey(d))
                     AddEdge(coordinate, d, 1);
             }
-
         }
 
         public Vertex GetVertex(Vector2 coordinate)
@@ -79,9 +101,8 @@ namespace Arce.NavigationGraph
                 vertex.Reset();
         }
         
-
-        // Dijkstra algorithm
-        public LinkedList<Vertex> Dijkstra(Vector2 Start, Vector2 Target)
+        // A* algorithm
+        public LinkedList<Vertex> AStar(Vector2 Start, Vector2 Target)
         {
             ClearAll();
 
@@ -172,7 +193,7 @@ namespace Arce.NavigationGraph
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.Yellow);
                     else
                         spriteBatch.DrawLine(vertex.coordinate, edge.Dest.coordinate, Color.ForestGreen);
-                
+
             // Draw vertex
             foreach (Vertex vertex in vertexMap.Values)
                 if (vertex.red == true)

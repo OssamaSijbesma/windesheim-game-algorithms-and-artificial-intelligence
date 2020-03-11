@@ -27,7 +27,6 @@ namespace Arce.Brain
             // Activate goal when inactive
             if (GoalStatus == GoalStatus.Inactive) Activate();
 
-
             // Decide which atomic goal to choose or to stop
             if(Subgoals.Count == 0)
                 if (DynamicEntity.Hunger >= 8 && DynamicEntity.Sleep >= 5) 
