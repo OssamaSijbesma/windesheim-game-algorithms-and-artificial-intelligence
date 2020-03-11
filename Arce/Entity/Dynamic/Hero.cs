@@ -12,20 +12,16 @@ using System.Threading.Tasks;
 
 namespace Arce.Entity
 {
-    class Hero : DynamicGameEntity
+    class Hero : ConsciousGameEntity
     {
         private Rectangle[] animationFrames;
         private int direction;
-        private IGoal brain;
-        private int ticks;
-        private float totalTime;
 
-        public Hero(EntityManager entityManager, Vector2 pos) : base(entityManager, pos)
+        public Hero(EntityManager entityManager, Vector2 position) : base(entityManager, position)
         {
             Mass = 1.0F;
             MaxSpeed = 80.0F;
-            brain = new ThinkGoal(this);
-            SteeringBehaviour = new SeekBehaviour(this, pos);
+            SteeringBehaviour = new SeekBehaviour(this, position);
 
             // Set animation frames
             animationFrames = new Rectangle[]
@@ -43,16 +39,7 @@ namespace Arce.Entity
 
         public override void Update(float timeElapsed)
         {
-            brain.Process();
-
             base.Update(timeElapsed);
-
-            totalTime += timeElapsed;
-            if (totalTime > 1)
-            {
-                totalTime = 0;
-                Sleep--;
-            }
 
             // Set the animation direction
             if (Heading.X > 0.5 && Heading.Y > 0.5) direction = 1;
@@ -67,8 +54,8 @@ namespace Arce.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
             spriteBatch.Draw(entityManager.mageTexture, Pos, animationFrames[direction], Color.White);
-            if(GameWorld.Instance.showInfo) spriteBatch.DrawString(entityManager.font, brain.ToString(), new Vector2(Pos.X + 28, Pos.Y), Color.Black);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Arce.Brain
         private LinkedList<Vector2> Path;
         private Vector2 target;
 
-        public FollowTargetGoal(DynamicGameEntity dynamicGameEntity) : base(dynamicGameEntity)
+        public FollowTargetGoal(ConsciousGameEntity entity) : base(entity)
         {
             GoalStatus = GoalStatus.Inactive;
             Path = new LinkedList<Vector2>();
@@ -28,7 +28,7 @@ namespace Arce.Brain
             target = GameWorld.Instance.Target;
 
             // Get new path
-            LinkedList<Vertex> newPath = GameWorld.Instance.navigationGraph.Dijkstra(DynamicEntity.Pos, GameWorld.Instance.Target);
+            LinkedList<Vertex> newPath = GameWorld.Instance.navigationGraph.Dijkstra(Entity.Pos, GameWorld.Instance.Target);
 
             // Convert the Vertex into Vector2
             foreach (Vertex vertex in newPath)
@@ -55,7 +55,7 @@ namespace Arce.Brain
             // Add subgoal 
             if (Path.Count != 0 && !Subgoals.OfType<TraverseVertexGoal>().Any())
             {
-                AddSubgoal(new TraverseVertexGoal(DynamicEntity, Path.First(), Path.Count));
+                AddSubgoal(new TraverseVertexGoal(Entity, Path.First(), Path.Count));
                 Path.RemoveFirst();
             }
 

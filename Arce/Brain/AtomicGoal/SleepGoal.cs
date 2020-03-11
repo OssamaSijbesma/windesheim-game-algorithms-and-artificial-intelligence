@@ -11,37 +11,37 @@ namespace Arce.Brain
     {
         public GoalStatus GoalStatus { get; set; }
 
-        private DynamicGameEntity dynamicGameEntity;
+        private ConsciousGameEntity entity;
         private float oldMaxSpeed;
         private int ticks;
 
-        public SleepGoal(DynamicGameEntity dynamicGameEntity) 
+        public SleepGoal(ConsciousGameEntity entity) 
         {
-            this.dynamicGameEntity = dynamicGameEntity;
+            this.entity = entity;
         }
 
         public void Activate()
         {
             GoalStatus = GoalStatus.Active;
-            oldMaxSpeed = dynamicGameEntity.MaxSpeed;
-            dynamicGameEntity.MaxSpeed = 0;
+            oldMaxSpeed = entity.MaxSpeed;
+            entity.MaxSpeed = 0;
         }
 
         public GoalStatus Process()
         {
             if (GoalStatus == GoalStatus.Inactive) Activate();
-            if (dynamicGameEntity.Sleep >= 10) Terminate();
+            if (entity.Sleep >= 10) Terminate();
             if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
 
             ticks++;
-            if (ticks >= 50) dynamicGameEntity.Sleep++;
+            if (ticks >= 50) entity.Sleep++;
 
             return GoalStatus;
         }
 
         public void Terminate()
         {
-            dynamicGameEntity.MaxSpeed = oldMaxSpeed;
+            entity.MaxSpeed = oldMaxSpeed;
             GoalStatus = GoalStatus.Completed;
         }
 

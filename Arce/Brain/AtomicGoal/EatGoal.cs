@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Arce.Brain
 {
@@ -11,39 +12,42 @@ namespace Arce.Brain
     {
         public GoalStatus GoalStatus { get; set; }
 
-        private DynamicGameEntity dynamicGameEntity;
+        private ConsciousGameEntity entity;
         private float oldMaxSpeed;
-        private int ticks;
+        private Timer timer;
 
-        public EatGoal(DynamicGameEntity dynamicGameEntity)
+        public EatGoal(ConsciousGameEntity entity)
         {
-            this.dynamicGameEntity = dynamicGameEntity;
+            this.entity = entity;
         }
 
         public void Activate()
         {
             GoalStatus = GoalStatus.Active;
-            oldMaxSpeed = dynamicGameEntity.MaxSpeed;
-            dynamicGameEntity.MaxSpeed = 0;
+            oldMaxSpeed = entity.MaxSpeed;
+            entity.MaxSpeed = 0;
+            timer = new Timer(1000);
+            timer.AutoReset = true;
+            timer.Elapsed += Eat;
         }
 
         public GoalStatus Process()
         {
             if (GoalStatus == GoalStatus.Inactive) Activate();
-            if (dynamicGameEntity.Hunger >= 10) Terminate();
+            if (entity.Hunger >= 1) Terminate();
             if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
-
-            ticks++;
-            if (ticks >= 10) dynamicGameEntity.Hunger++;
 
             return GoalStatus;
         }
 
         public void Terminate()
         {
-            dynamicGameEntity.MaxSpeed = oldMaxSpeed;
+            timer.Stop();
+            entity.MaxSpeed = oldMaxSpeed;
             GoalStatus = GoalStatus.Completed;
         }
+
+        private void Eat(Object source, ElapsedEventArgs e) => entity.Hunger += 0.1f;
 
         public override string ToString()
         {

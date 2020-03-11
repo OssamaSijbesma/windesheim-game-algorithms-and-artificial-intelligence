@@ -55,6 +55,7 @@
     <Compile Include="Brain\AtomicGoal\SleepGoal.cs" />
     <Compile Include="Brain\CompositeGoal.cs" />
     <Compile Include="Brain\CompositeGoal\VitalityGoal.cs" />
+    <Compile Include="Entity\ConsciousGameEntity.cs" />
     <Compile Include="Entity\Dynamic\AbstractFactory\SheepFactory.cs" />
     <Compile Include="Entity\BaseGameEntity.cs" />
     <Compile Include="Entity\DynamicGameEntity.cs" />

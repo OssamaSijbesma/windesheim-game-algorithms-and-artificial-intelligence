@@ -12,7 +12,7 @@ namespace Arce.Brain
     {
         private Vector2 oldTarget;
 
-        public ThinkGoal(DynamicGameEntity dynamicGameEntity) : base(dynamicGameEntity)
+        public ThinkGoal(ConsciousGameEntity entity) : base(entity)
         { }
 
         public override void Activate()
@@ -28,13 +28,13 @@ namespace Arce.Brain
             Subgoals.RemoveAll(g => g.GoalStatus == GoalStatus.Completed || g.GoalStatus == GoalStatus.Failed);
 
             // If hunger or sleep is below a certain point attent to vitality
-            if (!Subgoals.OfType<VitalityGoal>().Any() && (DynamicEntity.Hunger < 5 || DynamicEntity.Sleep < 3))
-                AddSubgoal(new VitalityGoal(DynamicEntity));
+            if (!Subgoals.OfType<VitalityGoal>().Any() && (Entity.Hunger < 0.5f || Entity.Sleep < 0.3f))
+                AddSubgoal(new VitalityGoal(Entity));
 
             // If the target changes follow the new target
             if (oldTarget != GameWorld.Instance.Target)
             {
-                AddSubgoal(new FollowTargetGoal(DynamicEntity));
+                AddSubgoal(new FollowTargetGoal(Entity));
                 oldTarget = GameWorld.Instance.Target;
             }
 

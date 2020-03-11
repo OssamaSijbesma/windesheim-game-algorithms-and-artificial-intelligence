@@ -9,15 +9,15 @@ namespace Arce.Brain
 {
     abstract class CompositeGoal : IGoal
     {
-        public DynamicGameEntity DynamicEntity { get; set; }
+        public ConsciousGameEntity Entity { get; set; }
 
         public GoalStatus GoalStatus { get; set; }
 
         public List<IGoal> Subgoals { get; set; }
 
-        public CompositeGoal(DynamicGameEntity dynamicEntity)
+        public CompositeGoal(ConsciousGameEntity entity)
         {
-            DynamicEntity = dynamicEntity;
+            Entity = entity;
             Subgoals = new List<IGoal>();
         }
 

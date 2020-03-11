@@ -9,7 +9,7 @@ namespace Arce.Brain
 {
     class VitalityGoal : CompositeGoal
     {
-        public VitalityGoal(DynamicGameEntity dynamicEntity) :base(dynamicEntity)
+        public VitalityGoal(ConsciousGameEntity entity) :base(entity)
         {
         
         }
@@ -27,15 +27,14 @@ namespace Arce.Brain
             // Activate goal when inactive
             if (GoalStatus == GoalStatus.Inactive) Activate();
 
-
             // Decide which atomic goal to choose or to stop
             if(Subgoals.Count == 0)
-                if (DynamicEntity.Hunger >= 8 && DynamicEntity.Sleep >= 5) 
+                if (Entity.Hunger >= 0.8 && Entity.Sleep >= 0.5) 
                     Terminate();
-                else if (DynamicEntity.Hunger < DynamicEntity.Sleep)
-                    AddSubgoal(new EatGoal(DynamicEntity));
+                else if (Entity.Hunger < Entity.Sleep)
+                    AddSubgoal(new EatGoal(Entity));
                 else
-                    AddSubgoal(new SleepGoal(DynamicEntity));
+                    AddSubgoal(new SleepGoal(Entity));
 
             Subgoals.ForEach(g => g.Process());
 
