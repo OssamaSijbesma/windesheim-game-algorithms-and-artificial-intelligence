@@ -8,5 +8,6 @@ namespace Arce.FuzzyLogic
 {
     abstract class FuzzyTerm
     {
+
     }
 }
