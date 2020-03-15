@@ -27,7 +27,7 @@ namespace Arce.FuzzyLogic
                 maxRange = max;
         }
 
-        public FzSet AddLeftShoulder(string name, double peak, double min, double max) 
+        public FzSet AddLeftShoulder(string name, double min, double peak, double max) 
         {
             members.Add(name, new LeftShoulder(peak, peak - min, peak - max));
             AdjustRangeToFit(min, max);
@@ -36,7 +36,7 @@ namespace Arce.FuzzyLogic
             return null;
         }
 
-        public FzSet AddRightShoulder(string name, double peak, double min, double max)
+        public FzSet AddRightShoulder(string name, double min, double peak, double max)
         {
             members.Add(name, new RightShoulder(peak, peak - min, peak - max));
             AdjustRangeToFit(min, max);
@@ -45,7 +45,7 @@ namespace Arce.FuzzyLogic
             return null;
         }
 
-        public FzSet AddTriangle(string name, double peak, double min, double max)
+        public FzSet AddTriangle(string name, double min, double peak, double max)
         {
             members.Add(name, new Triangle(peak, peak - min, peak - max));
             AdjustRangeToFit(min, max);
