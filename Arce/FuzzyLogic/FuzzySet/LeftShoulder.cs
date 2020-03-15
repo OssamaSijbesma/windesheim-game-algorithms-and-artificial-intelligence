@@ -40,10 +40,5 @@ namespace Arce.FuzzyLogic
             // Out of range of this FLV, return zero
             return 0.0;
         }
-
-        public override void ORwithDOM(double value)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

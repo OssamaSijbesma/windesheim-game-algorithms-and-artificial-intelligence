@@ -12,11 +12,11 @@ namespace Arce.FuzzyLogic
         private double leftOffset;
         private double rightOffset;
 
-        public Triangle(double mid, double left, double right) : base(mid)
+        public Triangle(double peakPoint, double leftOffset, double rightOffset) : base(peakPoint)
         {
-            peakPoint = mid;
-            leftOffset = left;
-            rightOffset = right;
+            this.peakPoint = peakPoint;
+            this.leftOffset = leftOffset;
+            this.rightOffset = rightOffset;
         }
         public override double CalculateDOM(double value)
         {
@@ -39,11 +39,6 @@ namespace Arce.FuzzyLogic
 
             // Out of range of this FLV, return zero
             return 0.0;
-        }
-
-        public override void ORwithDOM(double value)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -74,9 +74,9 @@
     <Compile Include="FuzzyLogic\FuzzySet\RightShoulder.cs" />
     <Compile Include="FuzzyLogic\FuzzySet\Triangle.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerm.cs" />
-    <Compile Include="FuzzyLogic\FuzzyTerm\FzAND.cs" />
+    <Compile Include="FuzzyLogic\FuzzyOperators\FzAND.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerm\FzFairly.cs" />
-    <Compile Include="FuzzyLogic\FuzzyTerm\FzOR.cs" />
+    <Compile Include="FuzzyLogic\FuzzyOperators\FzOR.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerm\FzSet.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerm\FzVery.cs" />
     <Compile Include="FuzzyLogic\FuzzyVariable.cs" />

@@ -8,8 +8,8 @@ namespace Arce.FuzzyLogic
 {
     abstract class FuzzySet
     {
-        public double DOM;
-        public double RepresentativeValue;
+        private double DOM;
+        private double RepresentativeValue;
 
         public FuzzySet(double representativeValue) 
         {
@@ -18,7 +18,12 @@ namespace Arce.FuzzyLogic
         }
 
         public abstract double CalculateDOM(double value);
-        public abstract void ORwithDOM(double value);
+
+        public virtual void ORwithDOM(double value) 
+        {
+            if (value > DOM)
+                DOM = value;
+        }
 
         public virtual double GetRePresentativeVal() => RepresentativeValue;
         public virtual double GetDOM() => DOM;
