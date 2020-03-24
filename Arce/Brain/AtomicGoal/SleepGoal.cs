@@ -37,7 +37,7 @@ namespace Arce.Brain
         public GoalStatus Process()
         {
             if (GoalStatus == GoalStatus.Inactive) Activate();
-            if (entity.Sleep >= 10) Terminate();
+            if (entity.Sleep >= 1) Terminate();
             if (GoalStatus == GoalStatus.Completed || GoalStatus == GoalStatus.Failed) return GoalStatus;
 
             return GoalStatus;
@@ -49,7 +49,7 @@ namespace Arce.Brain
             GoalStatus = GoalStatus.Completed;
         }
 
-        private void Sleep(object sender, ElapsedEventArgs e) => entity.Sleep += 0.1f;
+        private void Sleep(object sender, ElapsedEventArgs e) => entity.Sleep += 0.01f;
         
         public override string ToString()
         {
